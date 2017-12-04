@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-J:\FinalProject\Group03\obj\Debug\
+I:\Group Project\Group03\obj\Debug\
 Group03
 none
 false
 DEBUG;TRACE
-J:\FinalProject\Group03\App.xaml
+I:\Group Project\Group03\App.xaml
 548018325
 
-13-1793092174
+14-830264233
 131569487696
 MainWindow.xaml;New Reservation.xaml;New Reservation 2.xaml;Reservation Report.xaml;Room Mgmt.xaml;
 
-False
+True
 
