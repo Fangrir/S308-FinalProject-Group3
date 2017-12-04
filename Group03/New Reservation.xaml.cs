@@ -24,6 +24,13 @@ namespace Group03
             InitializeComponent();
         }
 
+        private void btnQuote_Click(object sender, RoutedEventArgs e)
+        {
+            if(txtNoOfRooms.Text.Trim() == "")
+            {
+                MessageBox.Show("Please input the room number");
+            }
 
+        }
     }
 }
