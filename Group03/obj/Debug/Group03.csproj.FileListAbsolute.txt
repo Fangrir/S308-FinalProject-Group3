@@ -88,3 +88,6 @@ C:\Users\frans\Desktop\Group03\Group03\obj\Debug\Room Mgmt.baml
 C:\Users\frans\Desktop\Group03\Group03\obj\Debug\Group03.g.resources
 C:\Users\frans\Desktop\Group03\Group03\obj\Debug\Group03.Properties.Resources.resources
 C:\Users\frans\Desktop\Group03\Group03\obj\Debug\Group03.csproj.GenerateResource.Cache
+C:\Users\frans\Desktop\New folder\Group03\bin\Debug\Group03.exe.config
+C:\Users\frans\Desktop\New folder\Group03\obj\Debug\Group03.exe
+C:\Users\frans\Desktop\New folder\Group03\obj\Debug\Group03.pdb
