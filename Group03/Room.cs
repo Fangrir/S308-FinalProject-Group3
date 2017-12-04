@@ -8,5 +8,6 @@ namespace Group03
 {
     class Room
     {
+        public string roomType;
     }
 }
