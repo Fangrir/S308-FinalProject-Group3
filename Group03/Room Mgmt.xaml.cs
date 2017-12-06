@@ -30,6 +30,53 @@ namespace Group03
             // declare variables
             int intQuantity;
             double dblPrice;
+            bool bolEmpty = false; // boolean that is set to true whenever there is an unselected/empty field
+            string strEmpty = ""; // string used to add fields that will be displayed whenever they are empty
+
+            // check for empty fields
+            // check if room type is not selected, if true set bolEmpty to true and add field to strEmpty
+            if (cbxRoomType.SelectedIndex == -1)
+            {
+                bolEmpty = true;
+                strEmpty = "room type";
+            }
+
+            // check if quantity is empty
+            if (txtQuantity.Text.Trim() == "")
+            {
+                if (bolEmpty == true) // if bolEmpty is already true, just add the field to strEmpty
+                {
+                    strEmpty = strEmpty + ", quantity";
+                }
+
+                else // if not, also set bolEmpty to true
+                {
+                    bolEmpty = true;
+                    strEmpty = "quantity";
+                }
+            }
+
+            // check if price is empty
+            if (txtPrice.Text.Trim() == "")
+            {
+                if (bolEmpty == true) // if bolEmpty is already trye, just add the field to strEmpty
+                {
+                    strEmpty = strEmpty + ", price";
+                }
+
+                else // if not, also set bolEmpty to true
+                {
+                    bolEmpty = true;
+                    strEmpty = "price";
+                }
+            }
+
+            // if bolEmpty is true, display message showing all empty fields that needs to be sorted out
+            if (bolEmpty == true)
+            {
+                MessageBox.Show("The field(s) " + strEmpty + " cannot be empty.");
+                return;
+            }
 
             // check that quantity input is numeric
             if (!Int32.TryParse(txtQuantity.Text.Trim(), out intQuantity))
@@ -57,6 +104,13 @@ namespace Group03
                 MessageBox.Show("Price cannot be a negative number.");
                 return;
             }
+        }
+
+        private void btnMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow MW = new MainWindow();
+            MW.Show();
+            this.Close();
         }
     }
 }
