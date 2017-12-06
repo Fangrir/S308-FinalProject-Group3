@@ -60,6 +60,7 @@
     <Compile Include="Room Mgmt.xaml.cs">
       <DependentUpon>Room Mgmt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Room.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

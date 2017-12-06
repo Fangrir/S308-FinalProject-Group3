@@ -22,8 +22,48 @@ namespace Group03
         public New_Reservation()
         {
             InitializeComponent();
+
         }
 
+        private void dtpCheckIn_SelectedDateChange(object sender, SelectionChangedEventArgs e)
+        {
+            if (dtpCheckIn.SelectedDate < DateTime.Today)
+            {
+                MessageBox.Show("Please input a valid date");
+                return;
+            }
+        }
+
+        private void dtpCheckOut_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dtpCheckOut.SelectedDate < dtpCheckIn.SelectedDate && dtpCheckOut.SelectedDate < DateTime.Today)
+            {
+                MessageBox.Show("Please input a valid date");
+                return;
+            }
+        }
+
+        private void btnQuote_Click(object sender, RoutedEventArgs e)
+        {
+            string CheckinDate;
+            string CheckOutDate;
+
+            if(txtNoOfRooms.Text.Trim() == "")
+            {
+                MessageBox.Show("Room number cannot be blank");
+            }
+            else if (dtpCheckIn.SelectedDate.ToString() == "")
+            {
+                MessageBox.Show("Please select a check in date!");
+                return;
+            }
+            else if (dtpCheckOut.SelectedDate.ToString() == "")
+            {
+                MessageBox.Show("Please select a check out date!");
+                return;
+            }
+
+        }
 
     }
 }
