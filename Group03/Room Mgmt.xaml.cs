@@ -19,14 +19,24 @@ namespace Group03
     /// </summary>
     public partial class Room_Mgmt : Window
     {
+        List<Room> roomList;
         public Room_Mgmt()
         {
             InitializeComponent();
+            roomList = new List<Room>();
+
             // load file from json and insert into data grid
+
+            // point data grid source to list
+            dtgRoomList.ItemsSource = roomList;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            // Room roomNew = new Room("One King", 30, 179);
+            // roomList.Add(roomNew);
+            // dtgRoomList.Items.Refresh();
+
             // declare variables
             int intQuantity;
             double dblPrice;
