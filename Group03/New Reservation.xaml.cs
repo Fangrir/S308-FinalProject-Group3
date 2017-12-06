@@ -24,7 +24,8 @@ namespace Group03
             InitializeComponent();
 
         }
-
+        
+        //When the users select a checkin date
         private void dtpCheckIn_SelectedDateChange(object sender, SelectionChangedEventArgs e)
         {
             if (dtpCheckIn.SelectedDate < DateTime.Today)
@@ -34,19 +35,29 @@ namespace Group03
             }
         }
 
+        //When the users select a checkout date
         private void dtpCheckOut_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dtpCheckOut.SelectedDate < dtpCheckIn.SelectedDate && dtpCheckOut.SelectedDate < DateTime.Today)
+            if (dtpCheckOut.SelectedDate < dtpCheckIn.SelectedDate || dtpCheckOut.SelectedDate < DateTime.Today)
             {
                 MessageBox.Show("Please input a valid date");
                 return;
             }
         }
 
+        //When the users click the Create Quote Button
         private void btnQuote_Click(object sender, RoutedEventArgs e)
         {
+            //String Variable
             string CheckinDate;
             string CheckOutDate;
+            string Room_Type;
+
+            //int variable
+            int No_of_Room;
+
+            //parse variable
+            int a;
 
             if(txtNoOfRooms.Text.Trim() == "")
             {
@@ -63,7 +74,65 @@ namespace Group03
                 return;
             }
 
+            else if (dtpCheckIn.SelectedDate < DateTime.Today)
+            {
+                MessageBox.Show("Please input a valid date");
+                return;
+            }
+            else if (dtpCheckOut.SelectedDate < dtpCheckIn.SelectedDate && 
+                dtpCheckOut.SelectedDate < DateTime.Today)
+            {
+                MessageBox.Show("Please input a valid date");
+                return;
+            }
+            else if (txtNoOfRooms.Text.Trim() == "")
+            {
+                MessageBox.Show("Please input the number of room");
+                return;
+            }
+            else if(!Int32.TryParse(txtNoOfRooms.Text.Trim(), out a ))
+            {
+                MessageBox.Show("Please input a valid number of rooms");
+                return;
+            }
+            else if (cbxRoomType.SelectedIndex == -1)
+            {
+                //if a customer type is not selected
+                MessageBox.Show("Please choose a room type");
+            }
+            else
+            {
+                //if a customer type is selected
+                ComboBoxItem cbiSelectedItem = (ComboBoxItem)cbxRoomType.SelectedItem;
+                Room_Type = cbiSelectedItem.Content.ToString().ToUpper().Trim();
+            }
+
+            
+            CheckinDate = dtpCheckIn.SelectedDate.ToString();
+            CheckOutDate = dtpCheckOut.SelectedDate.ToString();
+
+            No_of_Room = Convert.ToInt32(txtNoOfRooms.Text.Trim());
+
+            txtQuote.Text = "Number of Night: " + (dtpCheckOut.SelectedDate - dtpCheckIn.SelectedDate);
+
+
         }
 
+        //When the Main Menu is clicked
+        private void btnMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow MW = new MainWindow();
+            MW.Show();
+            this.Close();
+
+        }
+
+        //When the Create Reservation is clicked
+        private void btnReservation_Click(object sender, RoutedEventArgs e)
+        {
+            New_Reservation_2 CompleteReservation = new New_Reservation_2();
+            CompleteReservation.Show();
+            this.Close();
+        }
     }
 }
