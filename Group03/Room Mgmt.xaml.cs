@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Group03
 {
@@ -33,9 +35,23 @@ namespace Group03
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            // Room roomNew = new Room("One King", 30, 179);
-            // roomList.Add(roomNew);
-            // dtgRoomList.Items.Refresh();
+            Room room1 = new Room("One King", 30, 179.00);
+            Room room2 = new Room("One King Deluxe", 10, 189.00);
+            Room room3 = new Room("Two Queens", 30, 189.00);
+            Room room4 = new Room("Two Queen Deluxe", 15, 214.00);
+            Room room5 = new Room("One King Suite", 10, 249.00);
+            Room room6 = new Room("One King Presidential Suite", 5, 289.00);
+
+            roomList.Add(room1);
+            roomList.Add(room2);
+            roomList.Add(room3);
+            roomList.Add(room4);
+            roomList.Add(room5);
+            roomList.Add(room6);
+
+            dtgRoomList.Items.Refresh();
+
+            SaveToJson();
 
             // declare variables
             int intQuantity;
@@ -121,6 +137,29 @@ namespace Group03
             MainWindow MW = new MainWindow();
             MW.Show();
             this.Close();
+        }
+
+        private void SaveToJson()
+        {
+            string strFilePath = @"..\..\Data\Rooms.json";
+
+            // try to export JSON data from custList
+            try
+            {
+                StreamWriter writer = new StreamWriter(strFilePath, false);
+                string jsonData = JsonConvert.SerializeObject(roomList);
+                writer.Write(jsonData);
+                writer.Close();
+            }
+
+            // if an error occurs print out error message
+            catch (Exception ex)
+            {
+                MessageBox.Show("Export failed: " + ex.Message);
+            }
+
+            // notify user that the export is completed and show filepath of new file
+            MessageBox.Show("Export successful." + Environment.NewLine + "File Created: " + strFilePath);
         }
     }
 }

@@ -132,3 +132,5 @@ I:\Group Project\Group03\obj\Debug\Room Mgmt.baml
 I:\Group Project\Group03\obj\Debug\Group03.g.resources
 I:\Group Project\Group03\obj\Debug\Group03.Properties.Resources.resources
 I:\Group Project\Group03\obj\Debug\Group03.csproj.GenerateResource.Cache
+I:\Group Project\Group03\bin\Debug\Newtonsoft.Json.dll
+I:\Group Project\Group03\bin\Debug\Newtonsoft.Json.xml
