@@ -27,32 +27,15 @@ namespace Group03
             InitializeComponent();
             roomList = new List<Room>();
 
-            // load file from json and insert into data grid
-
             // point data grid source to list
             dtgRoomList.ItemsSource = roomList;
+
+            // load file from json and insert into data grid
+            LoadFromJson();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Room room1 = new Room("One King", 30, 179.00);
-            Room room2 = new Room("One King Deluxe", 10, 189.00);
-            Room room3 = new Room("Two Queens", 30, 189.00);
-            Room room4 = new Room("Two Queen Deluxe", 15, 214.00);
-            Room room5 = new Room("One King Suite", 10, 249.00);
-            Room room6 = new Room("One King Presidential Suite", 5, 289.00);
-
-            roomList.Add(room1);
-            roomList.Add(room2);
-            roomList.Add(room3);
-            roomList.Add(room4);
-            roomList.Add(room5);
-            roomList.Add(room6);
-
-            dtgRoomList.Items.Refresh();
-
-            SaveToJson();
-
             // declare variables
             int intQuantity;
             double dblPrice;
@@ -139,11 +122,37 @@ namespace Group03
             this.Close();
         }
 
+        private void LoadFromJson()
+        {
+            string strFilePath = @"..\..\Data\Rooms.json";
+
+            // read and try to import JSON data into roomList
+            try
+            {
+                StreamReader reader = new StreamReader(strFilePath);
+                string jsonData = reader.ReadToEnd();
+                reader.Close();
+
+                roomList = JsonConvert.DeserializeObject<List<Room>>(jsonData);
+
+                dtgRoomList.ItemsSource = roomList;
+            }
+
+            // if an error occurs print out error message
+            catch (Exception ex)
+            {
+                MessageBox.Show("Import failed: " + ex.Message);
+            }
+
+            // refresh the data grid
+            dtgRoomList.Items.Refresh();
+        }
+
         private void SaveToJson()
         {
             string strFilePath = @"..\..\Data\Rooms.json";
 
-            // try to export JSON data from custList
+            // try to export JSON data from roomList
             try
             {
                 StreamWriter writer = new StreamWriter(strFilePath, false);
