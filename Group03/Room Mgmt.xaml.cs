@@ -113,6 +113,23 @@ namespace Group03
                 MessageBox.Show("Price cannot be a negative number.");
                 return;
             }
+
+            // search room object from list that matches the selected room type
+            foreach (Room r in roomList)
+            {
+                // modify the data if the object matches the selected room type
+                if (r.Type == cbxRoomType.Text)
+                {
+                    r.Quantity = intQuantity;
+                    r.Price = dblPrice;
+                }
+            }
+
+            // refresh the data grid
+            dtgRoomList.Items.Refresh();
+
+            // export to JSON
+            SaveToJson();
         }
 
         private void btnMainMenu_Click(object sender, RoutedEventArgs e)
