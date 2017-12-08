@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Group03
 {
@@ -19,10 +21,19 @@ namespace Group03
     /// </summary>
     public partial class Room_Mgmt : Window
     {
+        List<Room> roomList;
         public Room_Mgmt()
         {
             InitializeComponent();
+
+            // create a room list
+            roomList = new List<Room>();
+
+            // point data grid source to list
+            dtgRoomList.ItemsSource = roomList;
+
             // load file from json and insert into data grid
+            LoadFromJson();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -104,6 +115,23 @@ namespace Group03
                 MessageBox.Show("Price cannot be a negative number.");
                 return;
             }
+
+            // search room object from list that matches the selected room type
+            foreach (Room r in roomList)
+            {
+                // modify the data if the object matches the selected room type
+                if (r.Type == cbxRoomType.Text)
+                {
+                    r.Quantity = intQuantity;
+                    r.Price = dblPrice;
+                }
+            }
+
+            // refresh the data grid
+            dtgRoomList.Items.Refresh();
+
+            // export to JSON
+            SaveToJson();
         }
 
         private void btnMainMenu_Click(object sender, RoutedEventArgs e)
@@ -111,6 +139,55 @@ namespace Group03
             MainWindow MW = new MainWindow();
             MW.Show();
             this.Close();
+        }
+
+        private void LoadFromJson()
+        {
+            string strFilePath = @"..\..\Data\Rooms.json";
+
+            // read and try to import JSON data into roomList
+            try
+            {
+                StreamReader reader = new StreamReader(strFilePath);
+                string jsonData = reader.ReadToEnd();
+                reader.Close();
+
+                roomList = JsonConvert.DeserializeObject<List<Room>>(jsonData);
+
+                dtgRoomList.ItemsSource = roomList;
+            }
+
+            // if an error occurs print out error message
+            catch (Exception ex)
+            {
+                MessageBox.Show("Import failed: " + ex.Message);
+            }
+
+            // refresh the data grid
+            dtgRoomList.Items.Refresh();
+        }
+
+        private void SaveToJson()
+        {
+            string strFilePath = @"..\..\Data\Rooms.json";
+
+            // try to export JSON data from roomList
+            try
+            {
+                StreamWriter writer = new StreamWriter(strFilePath, false);
+                string jsonData = JsonConvert.SerializeObject(roomList);
+                writer.Write(jsonData);
+                writer.Close();
+            }
+
+            // if an error occurs print out error message
+            catch (Exception ex)
+            {
+                MessageBox.Show("Export failed: " + ex.Message);
+            }
+
+            // notify user that the export is completed and show filepath of new file
+            MessageBox.Show("Export successful." + Environment.NewLine + "File Created: " + strFilePath);
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Group03"
         mc:Ignorable="d"
-        Title="Room Management" Height="355.553" Width="627.098">
+        Title="Room Management" Height="355.553" Width="627.098" ResizeMode="NoResize">
     <Grid Margin="0,1,0,0" Background="#FFF9F3F3" Height="340" VerticalAlignment="Top">
         <Label x:Name="lblRoomType" Content="Room Type:" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblQuantity" Content="Quantity:" HorizontalAlignment="Left" Margin="10,158,0,0" VerticalAlignment="Top"/>

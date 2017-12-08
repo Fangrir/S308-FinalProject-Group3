@@ -8,9 +8,9 @@ namespace Group03
 {
     class Room
     {
-        public string Type;
-        public int Quantity;
-        public double Price;
+        public string Type { get; set; }
+        public int Quantity { get; set; }
+        public double Price { get; set; }
 
         public Room(string type, int quantity, double price)
         {
