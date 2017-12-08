@@ -5,20 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Group03"
         mc:Ignorable="d"
-        Title="Room Management" Height="368.987" Width="525">
+        Title="Room Management" Height="355.553" Width="627.098" ResizeMode="NoResize">
     <Grid Margin="0,1,0,0" Background="#FFF9F3F3" Height="340" VerticalAlignment="Top">
-        <TextBox x:Name="txtOutput" HorizontalAlignment="Left" Height="130" Margin="219,144,0,0" TextWrapping="Wrap" Text="Room Type                                 Quantity         Price&#xD;&#xA;One King                                    30                   $179&#xD;&#xA;One King Deluxe                        10                   $189&#xD;&#xA;Two Queens                               30                   $189&#xD;&#xA;Two Queen Deluxe                     15                   $214&#xD;&#xA;One King Suite                           10                   $249&#xD;&#xA;One King Presidential Suite        5                    $289" VerticalAlignment="Top" Width="290" IsTabStop="False" Background="#FFFFF9F9"/>
-        <Label x:Name="lblRoomType" Content="Room Type:" HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblQuantity" Content="Quantity:" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblPrice" Content="Price:" HorizontalAlignment="Left" Margin="10,204,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbxRoomType" HorizontalAlignment="Left" Margin="88,145,0,0" VerticalAlignment="Top" Width="120" TabIndex="0"/>
-        <TextBox x:Name="txtQuantity" HorizontalAlignment="Left" Height="23" Margin="88,176,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="120" TabIndex="1" Background="#FFFFF9F9"/>
-        <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Height="23" Margin="88,208,0,0" TextWrapping="Wrap" Text="150" VerticalAlignment="Top" Width="120" TabIndex="2" Background="#FFFFF9F9"/>
-        <Button x:Name="btnSave" Content="Confirm Changes" HorizontalAlignment="Left" Margin="54,247,0,0" VerticalAlignment="Top" Width="111" TabIndex="3" FontWeight="Bold" BorderThickness="0.1"/>
-        <Label x:Name="lblOutput" Content="Current Room List:" HorizontalAlignment="Left" Margin="216,118,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Button x:Name="btnMainMenu" Content="Main Menu" HorizontalAlignment="Left" Margin="204,307,0,0" VerticalAlignment="Top" Width="115" TabIndex="4" BorderThickness="0.1" FontWeight="Bold"/>
-        <Label x:Name="lblInstructions" Content="Choose the room type that you wish to make changes on the right. Enter the desired &#xA;quantity and price for that room type and click confirm changes. The saved changes&#xA;will be shown on the right." HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="491"/>
-        <Label x:Name="lblTitle" Content="                      Room Management" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Foreground="White" Width="518.333">
+        <Label x:Name="lblRoomType" Content="Room Type:" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblQuantity" Content="Quantity:" HorizontalAlignment="Left" Margin="10,158,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPrice" Content="Price:" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbxRoomType" HorizontalAlignment="Left" Margin="88,131,0,0" VerticalAlignment="Top" Width="197" TabIndex="0">
+            <ComboBoxItem Visibility="Hidden"/>
+            <ComboBoxItem Content="One King"/>
+            <ComboBoxItem Content="One King Deluxe"/>
+            <ComboBoxItem Content="Two Queens"/>
+            <ComboBoxItem Content="Two Queens Deluxe"/>
+            <ComboBoxItem Content="One King Suite"/>
+            <ComboBoxItem Content="One King Presidential Suite"/>
+        </ComboBox>
+        <TextBox x:Name="txtQuantity" HorizontalAlignment="Left" Height="23" Margin="88,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="1" Background="#FFFFF9F9"/>
+        <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Height="23" Margin="88,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="2" Background="#FFFFF9F9"/>
+        <Button x:Name="btnSave" Content="Confirm Changes" HorizontalAlignment="Left" Margin="118,242,0,0" VerticalAlignment="Top" Width="111" TabIndex="3" FontWeight="Bold" BorderThickness="0.1" Click="btnSave_Click"/>
+        <Label x:Name="lblOutput" Content="Current Room List:" HorizontalAlignment="Left" Margin="304,104,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Button x:Name="btnMainMenu" Content="Main Menu" HorizontalAlignment="Left" Margin="250,293,0,0" VerticalAlignment="Top" Width="115" TabIndex="4" BorderThickness="0.1" FontWeight="Bold" Click="btnMainMenu_Click"/>
+        <Label x:Name="lblInstructions" Content="Choose the room type that you wish to make changes on the right. Enter the desired quantity and price for &#xD;&#xA;that room type and click confirm changes. The saved changes will be shown on the right." HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="599"/>
+        <Label x:Name="lblTitle" Content="                             Room Management" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Foreground="White" Width="619">
             <Label.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF5898DC" Offset="0"/>
@@ -26,6 +33,7 @@
                 </LinearGradientBrush>
             </Label.Background>
         </Label>
+        <DataGrid x:Name="dtgRoomList" HorizontalAlignment="Left" Margin="309,135,0,0" VerticalAlignment="Top" Height="130" Width="279"/>
 
     </Grid>
 </Window>
