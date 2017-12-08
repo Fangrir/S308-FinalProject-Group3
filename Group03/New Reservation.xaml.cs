@@ -49,8 +49,8 @@ namespace Group03
         private void btnQuote_Click(object sender, RoutedEventArgs e)
         {
             //String Variable
-            string CheckinDate;
-            string CheckOutDate;
+            DateTime CheckinDate = new DateTime();
+            DateTime CheckOutDate = new DateTime();
             string Room_Type;
 
             //int variable
@@ -107,13 +107,14 @@ namespace Group03
                 Room_Type = cbiSelectedItem.Content.ToString().ToUpper().Trim();
             }
 
-            
-            CheckinDate = dtpCheckIn.SelectedDate.ToString();
-            CheckOutDate = dtpCheckOut.SelectedDate.ToString();
+            //Store the date
+            CheckinDate = dtpCheckIn.SelectedDate.Value;
+            CheckOutDate = dtpCheckOut.SelectedDate.Value;
 
-            No_of_Room = Convert.ToInt32(txtNoOfRooms.Text.Trim());
-
-            txtQuote.Text = "Number of Night: " + (dtpCheckOut.SelectedDate - dtpCheckIn.SelectedDate);
+            //Output
+            txtQuote.Text = "Number of Night: " + (CheckOutDate-CheckinDate).Days + Environment.NewLine
+                + "Rate per Night: " + Environment.NewLine + "No of Rooms: " + txtNoOfRooms.Text.Trim() +
+                Environment.NewLine;
 
 
         }
