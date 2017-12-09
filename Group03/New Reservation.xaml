@@ -34,7 +34,7 @@
         <Label x:Name="lblNoRooms" Content="No. of Rooms:" HorizontalAlignment="Left" Margin="28,123,0,0" VerticalAlignment="Top" Height="26" Width="85"/>
         <DatePicker x:Name="dtpCheckIn" HorizontalAlignment="Left" Margin="118,157,0,0" VerticalAlignment="Top" IsTabStop="True" TabIndex="2" Height="24" Width="102" Background="#FFFFF9F9" SelectedDateChanged="dtpCheckIn_SelectedDateChange"/>
         <Label x:Name="lblCheckIn" Content="Check In:" HorizontalAlignment="Left" Margin="28,156,0,0" VerticalAlignment="Top" Height="26" Width="58"/>
-        <TextBox x:Name="txtNoOfRooms" HorizontalAlignment="Left" Height="22" Margin="118,127,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="24" TabIndex="1" Background="#FFFFF9F9"/>
+        <TextBox x:Name="txtNoOfRooms" HorizontalAlignment="Left" Height="22" Margin="118,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="24" TabIndex="1" Background="#FFFFF9F9"/>
         <Label x:Name="lblCheckOut" Content="Check Out:" HorizontalAlignment="Left" Margin="28,190,0,0" VerticalAlignment="Top" Height="26" Width="68"/>
         <DatePicker x:Name="dtpCheckOut" HorizontalAlignment="Left" Margin="118,191,0,0" VerticalAlignment="Top" IsTabStop="True" TabIndex="3" Height="24" Width="102" SelectedDateChanged="dtpCheckOut_SelectedDateChanged"/>
         <Button x:Name="btnQuote" Content="Calculate Quote" HorizontalAlignment="Left" Margin="83,252,0,0" VerticalAlignment="Top" Width="124" TabIndex="4" Height="20" FontWeight="Bold" BorderThickness="0.1" Click="btnQuote_Click"/>

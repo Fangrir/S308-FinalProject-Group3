@@ -67,12 +67,16 @@ namespace Group03
             //double variable
             double RatePerNight = 0;
 
-            //parse variable
-            int a;
-
-            if(txtNoOfRooms.Text.Trim() == "")
+            if (cbxRoomType.SelectedIndex == -1)
+            {
+                //if a room type is not selected
+                MessageBox.Show("Please choose a room type");
+                return;
+            }
+            else if (txtNoOfRooms.Text.Trim() == "")
             {
                 MessageBox.Show("Room number cannot be blank");
+                return;
             }
             else if (dtpCheckIn.SelectedDate.ToString() == "")
             {
@@ -101,15 +105,10 @@ namespace Group03
                 MessageBox.Show("Please input the number of room");
                 return;
             }
-            else if(!Int32.TryParse(txtNoOfRooms.Text.Trim(), out a ))
+            else if(!Int32.TryParse(txtNoOfRooms.Text.Trim(), out int a ))
             {
                 MessageBox.Show("Please input a valid number of rooms");
                 return;
-            }
-            else if (cbxRoomType.SelectedIndex == -1)
-            {
-                //if a customer type is not selected
-                MessageBox.Show("Please choose a room type");
             }
 
             //Store no of rooms
