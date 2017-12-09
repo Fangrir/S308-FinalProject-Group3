@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Group03
 {
@@ -19,10 +21,16 @@ namespace Group03
     /// </summary>
     public partial class New_Reservation : Window
     {
+        List<Room> roomList;
         public New_Reservation()
         {
             InitializeComponent();
 
+            // create a room lists
+            roomList = new List<Room>();
+
+            // load rooms data from json and insert into list
+            LoadFromJson();
         }
         
         //When the users select a checkin date
@@ -51,10 +59,13 @@ namespace Group03
             //String Variable
             DateTime CheckinDate = new DateTime();
             DateTime CheckOutDate = new DateTime();
-            string Room_Type;
 
             //int variable
-            int No_of_Room;
+            int NoOfRooms;
+            int NoOfNights;
+
+            //double variable
+            double RatePerNight = 0;
 
             //parse variable
             int a;
@@ -100,23 +111,33 @@ namespace Group03
                 //if a customer type is not selected
                 MessageBox.Show("Please choose a room type");
             }
-            else
-            {
-                //if a customer type is selected
-                ComboBoxItem cbiSelectedItem = (ComboBoxItem)cbxRoomType.SelectedItem;
-                Room_Type = cbiSelectedItem.Content.ToString().ToUpper().Trim();
-            }
 
-            //Store the date
+            //Store no of rooms
+            NoOfRooms = Convert.ToInt32(txtNoOfRooms.Text.Trim());
+
+            //Store the date and assign difference to NoOfNights
             CheckinDate = dtpCheckIn.SelectedDate.Value;
             CheckOutDate = dtpCheckOut.SelectedDate.Value;
+            NoOfNights = (int)(CheckOutDate - CheckinDate).TotalDays;
+
+            //Get rate from matching room type from room list
+            foreach (Room r in roomList)
+            {
+                if (r.Type == cbxRoomType.Text)
+                {
+                    RatePerNight = r.Price;
+                }
+            }
 
             //Output
-            txtQuote.Text = "Number of Night: " + (CheckOutDate-CheckinDate).Days + Environment.NewLine
-                + "Rate per Night: " + Environment.NewLine + "No of Rooms: " + txtNoOfRooms.Text.Trim() +
-                Environment.NewLine;
-
-
+            txtQuote.Text = 
+                "Number of Night(s): " + NoOfNights + Environment.NewLine +
+                "Rate per Night: " + RatePerNight + Environment.NewLine +
+                "No of Rooms: " + NoOfRooms + Environment.NewLine +
+                "Subtotal: " + (NoOfNights * RatePerNight * NoOfRooms) + Environment.NewLine + Environment.NewLine +
+                "Tax (7%): " + ((NoOfNights * RatePerNight * NoOfRooms) * 0.07) + Environment.NewLine +
+                "Convenience Fee ($10/night): " + (10 * NoOfNights) + Environment.NewLine +
+                "Total: " + ((NoOfNights * RatePerNight * NoOfRooms) + ((NoOfNights * RatePerNight * NoOfRooms) * 0.07) + (10 * NoOfNights));
         }
 
         //When the Main Menu is clicked
@@ -125,7 +146,6 @@ namespace Group03
             MainWindow MW = new MainWindow();
             MW.Show();
             this.Close();
-
         }
 
         //When the Create Reservation is clicked
@@ -134,6 +154,27 @@ namespace Group03
             New_Reservation_2 CompleteReservation = new New_Reservation_2();
             CompleteReservation.Show();
             this.Close();
+        }
+
+        private void LoadFromJson()
+        {
+            string strFilePath = @"..\..\Data\Rooms.json";
+
+            // read and try to import JSON data into roomList
+            try
+            {
+                StreamReader reader = new StreamReader(strFilePath);
+                string jsonData = reader.ReadToEnd();
+                reader.Close();
+
+                roomList = JsonConvert.DeserializeObject<List<Room>>(jsonData);
+            }
+
+            // if an error occurs print out error message
+            catch (Exception ex)
+            {
+                MessageBox.Show("Import failed: " + ex.Message);
+            }
         }
     }
 }
