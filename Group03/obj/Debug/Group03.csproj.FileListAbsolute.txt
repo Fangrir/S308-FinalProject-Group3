@@ -145,3 +145,17 @@ D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\obj\Debug\Group03_Mar
 D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\obj\Debug\Group03_MarkupCompile.lref
 D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\obj\Debug\Group03.exe
 D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\obj\Debug\Group03.pdb
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\bin\Debug\Group03.exe.config
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\bin\Debug\Group03.exe
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\bin\Debug\Group03.pdb
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\bin\Debug\Newtonsoft.Json.dll
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\bin\Debug\Newtonsoft.Json.xml
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\obj\Debug\MainWindow.baml
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\obj\Debug\New Reservation.baml
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\obj\Debug\New Reservation 2.baml
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\obj\Debug\Reservation Report.baml
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\obj\Debug\Room Mgmt.baml
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\obj\Debug\Group03.g.resources
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\obj\Debug\Group03.Properties.Resources.resources
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\obj\Debug\Group03.csproj.GenerateResource.Cache
+D:\Users\Nelson\Dropbox\IU\BUS-S 308\Final Project\Group03\obj\Debug\Group03.csproj.CoreCompileInputs.cache
