@@ -129,15 +129,13 @@ namespace Group03
                 }
             }
 
-            //Output
-            txtQuote.Text = 
-                "Number of Night(s): " + NoOfNights + Environment.NewLine +
-                "Rate per Night: " + RatePerNight + Environment.NewLine +
-                "No of Rooms: " + NoOfRooms + Environment.NewLine +
-                "Subtotal: " + (NoOfNights * RatePerNight * NoOfRooms) + Environment.NewLine + Environment.NewLine +
-                "Tax (7%): " + ((NoOfNights * RatePerNight * NoOfRooms) * 0.07) + Environment.NewLine +
-                "Convenience Fee ($10/night): " + (10 * NoOfNights) + Environment.NewLine +
-                "Total: " + ((NoOfNights * RatePerNight * NoOfRooms) + ((NoOfNights * RatePerNight * NoOfRooms) * 0.07) + (10 * NoOfNights));
+            //Calculate quote variables and output them
+            lblNoOfNightsOut.Content = NoOfNights;
+            lblRatePerNightOut.Content = "$" + String.Format("{0:n}", RatePerNight);
+            lblSubtotalOut.Content = "$" + String.Format("{0:n}", (NoOfNights * RatePerNight * NoOfRooms));
+            lblTaxOut.Content = "$" + String.Format("{0:n}", ((NoOfNights * RatePerNight * NoOfRooms) * 0.07));
+            lblConvFeeOut.Content = "$" + String.Format("{0:n}", (10 * NoOfNights));
+            lblTotalOut.Content = "$" + String.Format("{0:n}", ((NoOfNights * RatePerNight * NoOfRooms) + ((NoOfNights * RatePerNight * NoOfRooms) * 0.07) + (10 * NoOfNights)));
         }
 
         //When the Main Menu is clicked
