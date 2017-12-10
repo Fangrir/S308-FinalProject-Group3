@@ -142,45 +142,7 @@ namespace Group03
 
         }
 
-
-        private void ImportFromJson()
-        {
-            string strFilePath = @"..\..\Data\Rooms.json"; // PENTING ! CEK SM KENNY NYIMPEN DATA DIMANA
-
-            // read and try to import JSON data into roomList
-            try
-            {
-                StreamReader reader = new StreamReader(strFilePath);
-                string jsonData = reader.ReadToEnd();
-                reader.Close();
-
-                roomList = JsonConvert.DeserializeObject<List<Room>>(jsonData);
-
-                dtgRoomList.ItemsSource = roomList;
-            }
-
-            // if an error occurs print out error message
-            catch (Exception ex)
-            {
-                MessageBox.Show("Import failed: " + ex.Message);
-            }
-
-            // refresh the data grid
-            dtgRoomList.Items.Refresh();
-        }
-
-        private void ExportToJson()
-        {
-            string strFilePath = @"..\..\Data\Rooms.json";
-
-            // try to export JSON data from roomList
-            try
-            {
-                StreamWriter writer = new StreamWriter(strFilePath, false);
-                string jsonData = JsonConvert.SerializeObject(roomList);
-                writer.Write(jsonData);
-                writer.Close();
-            }
+                lblRoomType = New_Reservation.Room_Type;
 
             // if an error occurs print out error message
             catch (Exception ex)

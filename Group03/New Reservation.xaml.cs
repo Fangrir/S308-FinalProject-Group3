@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Group03
 {
@@ -19,10 +21,16 @@ namespace Group03
     /// </summary>
     public partial class New_Reservation : Window
     {
+        List<Room> roomList;
         public New_Reservation()
         {
             InitializeComponent();
 
+            // create a room lists
+            roomList = new List<Room>();
+
+            // load rooms data from json and insert into list
+            LoadFromJson();
         }
         
         //When the users select a checkin date
@@ -31,6 +39,7 @@ namespace Group03
             if (dtpCheckIn.SelectedDate < DateTime.Today)
             {
                 MessageBox.Show("Please input a valid date");
+                dtpCheckIn.SelectedDate = null;
                 return;
             }
         }
@@ -41,6 +50,7 @@ namespace Group03
             if (dtpCheckOut.SelectedDate < dtpCheckIn.SelectedDate || dtpCheckOut.SelectedDate < DateTime.Today)
             {
                 MessageBox.Show("Please input a valid date");
+                dtpCheckOut.SelectedDate = null;
                 return;
             }
         }
@@ -49,19 +59,26 @@ namespace Group03
         private void btnQuote_Click(object sender, RoutedEventArgs e)
         {
             //String Variable
-            string CheckinDate;
-            string CheckOutDate;
-            string Room_Type;
+            DateTime CheckinDate = new DateTime();
+            DateTime CheckOutDate = new DateTime();
 
             //int variable
-            int No_of_Room;
+            int NoOfRooms;
+            int NoOfNights;
 
-            //parse variable
-            int a;
+            //double variable
+            double RatePerNight = 0;
 
-            if(txtNoOfRooms.Text.Trim() == "")
+            if (cbxRoomType.SelectedIndex == -1)
+            {
+                //if a room type is not selected
+                MessageBox.Show("Please choose a room type");
+                return;
+            }
+            else if (txtNoOfRooms.Text.Trim() == "")
             {
                 MessageBox.Show("Room number cannot be blank");
+                return;
             }
             else if (dtpCheckIn.SelectedDate.ToString() == "")
             {
@@ -77,12 +94,14 @@ namespace Group03
             else if (dtpCheckIn.SelectedDate < DateTime.Today)
             {
                 MessageBox.Show("Please input a valid date");
+                dtpCheckIn.SelectedDate = null;
                 return;
             }
             else if (dtpCheckOut.SelectedDate < dtpCheckIn.SelectedDate && 
                 dtpCheckOut.SelectedDate < DateTime.Today)
             {
                 MessageBox.Show("Please input a valid date");
+                dtpCheckOut.SelectedDate = null;
                 return;
             }
             else if (txtNoOfRooms.Text.Trim() == "")
@@ -90,32 +109,36 @@ namespace Group03
                 MessageBox.Show("Please input the number of room");
                 return;
             }
-            else if(!Int32.TryParse(txtNoOfRooms.Text.Trim(), out a ))
+            else if(!Int32.TryParse(txtNoOfRooms.Text.Trim(), out int a ))
             {
                 MessageBox.Show("Please input a valid number of rooms");
                 return;
             }
-            else if (cbxRoomType.SelectedIndex == -1)
+
+            //Store no of rooms
+            NoOfRooms = Convert.ToInt32(txtNoOfRooms.Text.Trim());
+
+            //Store the date and assign difference to NoOfNights
+            CheckinDate = dtpCheckIn.SelectedDate.Value;
+            CheckOutDate = dtpCheckOut.SelectedDate.Value;
+            NoOfNights = (int)(CheckOutDate - CheckinDate).TotalDays;
+
+            //Get rate from matching room type from room list
+            foreach (Room r in roomList)
             {
-                //if a customer type is not selected
-                MessageBox.Show("Please choose a room type");
-            }
-            else
-            {
-                //if a customer type is selected
-                ComboBoxItem cbiSelectedItem = (ComboBoxItem)cbxRoomType.SelectedItem;
-                Room_Type = cbiSelectedItem.Content.ToString().ToUpper().Trim();
+                if (r.Type == cbxRoomType.Text)
+                {
+                    RatePerNight = r.Price;
+                }
             }
 
-            
-            CheckinDate = dtpCheckIn.SelectedDate.ToString();
-            CheckOutDate = dtpCheckOut.SelectedDate.ToString();
-
-            No_of_Room = Convert.ToInt32(txtNoOfRooms.Text.Trim());
-
-            txtQuote.Text = "Number of Night: " + (dtpCheckOut.SelectedDate - dtpCheckIn.SelectedDate);
-
-
+            //Calculate quote variables and output them
+            lblNoOfNightsOut.Content = NoOfNights;
+            lblRatePerNightOut.Content = "$" + String.Format("{0:n}", RatePerNight);
+            lblSubtotalOut.Content = "$" + String.Format("{0:n}", (NoOfNights * RatePerNight * NoOfRooms));
+            lblTaxOut.Content = "$" + String.Format("{0:n}", ((NoOfNights * RatePerNight * NoOfRooms) * 0.07));
+            lblConvFeeOut.Content = "$" + String.Format("{0:n}", (10 * NoOfNights));
+            lblTotalOut.Content = "$" + String.Format("{0:n}", ((NoOfNights * RatePerNight * NoOfRooms) + ((NoOfNights * RatePerNight * NoOfRooms) * 0.07) + (10 * NoOfNights)));
         }
 
         //When the Main Menu is clicked
@@ -124,7 +147,6 @@ namespace Group03
             MainWindow MW = new MainWindow();
             MW.Show();
             this.Close();
-
         }
 
         //When the Create Reservation is clicked
@@ -133,6 +155,27 @@ namespace Group03
             New_Reservation_2 CompleteReservation = new New_Reservation_2();
             CompleteReservation.Show();
             this.Close();
+        }
+
+        private void LoadFromJson()
+        {
+            string strFilePath = @"..\..\Data\Rooms.json";
+
+            // read and try to import JSON data into roomList
+            try
+            {
+                StreamReader reader = new StreamReader(strFilePath);
+                string jsonData = reader.ReadToEnd();
+                reader.Close();
+
+                roomList = JsonConvert.DeserializeObject<List<Room>>(jsonData);
+            }
+
+            // if an error occurs print out error message
+            catch (Exception ex)
+            {
+                MessageBox.Show("Import failed: " + ex.Message);
+            }
         }
     }
 }

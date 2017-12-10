@@ -26,7 +26,7 @@ namespace Group03
         {
             InitializeComponent();
 
-            // create a room list
+            // create a room lists
             roomList = new List<Room>();
 
             // point data grid source to list

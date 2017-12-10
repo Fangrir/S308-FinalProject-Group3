@@ -110,6 +110,3 @@ J:\FinalProject\Group03\obj\Debug\Room Mgmt.baml
 J:\FinalProject\Group03\obj\Debug\Group03.g.resources
 J:\FinalProject\Group03\obj\Debug\Group03.Properties.Resources.resources
 J:\FinalProject\Group03\obj\Debug\Group03.csproj.GenerateResource.Cache
-C:\Users\frans\Desktop\New folder\Group03\bin\Debug\Group03.exe.config
-C:\Users\frans\Desktop\New folder\Group03\obj\Debug\Group03.exe
-C:\Users\frans\Desktop\New folder\Group03\obj\Debug\Group03.pdb
