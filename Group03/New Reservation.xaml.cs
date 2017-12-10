@@ -31,6 +31,8 @@ namespace Group03
 
             // load rooms data from json and insert into list
             LoadFromJson();
+
+
         }
         
         //When the users select a checkin date
@@ -58,7 +60,6 @@ namespace Group03
         //When the users click the Create Quote Button
         private void btnQuote_Click(object sender, RoutedEventArgs e)
         {
-            //String Variable
             DateTime CheckinDate = new DateTime();
             DateTime CheckOutDate = new DateTime();
 
@@ -132,12 +133,13 @@ namespace Group03
                 }
             }
 
+
             //Calculate quote variables and output them
             lblNoOfNightsOut.Content = NoOfNights;
             lblRatePerNightOut.Content = "$" + String.Format("{0:n}", RatePerNight);
             lblSubtotalOut.Content = "$" + String.Format("{0:n}", (NoOfNights * RatePerNight * NoOfRooms));
             lblTaxOut.Content = "$" + String.Format("{0:n}", ((NoOfNights * RatePerNight * NoOfRooms) * 0.07));
-            lblConvFeeOut.Content = "$" + String.Format("{0:n}", (10 * NoOfNights));
+            lblConvFeeOut.Content = "$" + String.Format("{0:n}", (10 * NoOfNights * NoOfRooms));
             lblTotalOut.Content = "$" + String.Format("{0:n}", ((NoOfNights * RatePerNight * NoOfRooms) + ((NoOfNights * RatePerNight * NoOfRooms) * 0.07) + (10 * NoOfNights)));
         }
 
@@ -177,5 +179,6 @@ namespace Group03
                 MessageBox.Show("Import failed: " + ex.Message);
             }
         }
+
     }
 }

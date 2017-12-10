@@ -47,7 +47,7 @@ namespace Group03
             // check for empty fields
             // check if room type is not selected, if true set bolEmpty to true and add field to strEmpty
             if (cbxRoomType.SelectedIndex == -1)
-            {d
+            {
                 bolEmpty = true;
                 strEmpty = "room type";
             }

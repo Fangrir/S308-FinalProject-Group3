@@ -26,7 +26,7 @@
         <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="23" Margin="130.133,199,-24.906,0" TextWrapping="Wrap" Text="(925) 332-9480" VerticalAlignment="Top" Width="133.734" TabIndex="4" Background="#FFFFF9F9"/>
         <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="130.133,231,-24.906,0" TextWrapping="Wrap" Text="fndra@umail.iu.edu" VerticalAlignment="Top" Width="133.734" TabIndex="5" Background="#FFFFF9F9"/>
         <Button x:Name="btnConfirm" Content="Confirm Reservation" HorizontalAlignment="Left" Margin="85,276,0,0" VerticalAlignment="Top" Width="128" TabIndex="6" Height="20" FontWeight="Bold" BorderThickness="0.1" Click="btnConfirm_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="85,276,0,0" VerticalAlignment="Top" Width="84" TabIndex="7" Grid.Column="1" Height="20" FontWeight="Bold" BorderThickness="0.1" Click="btnCancel_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="85,276,0,0" VerticalAlignment="Top" Width="84" TabIndex="7" Grid.Column="1" Height="20" FontWeight="Bold" BorderThickness="0.1"/>
         <Label x:Name="lblRoomType" Content="Room Type:" HorizontalAlignment="Left" Margin="47,103,0,0" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1" Height="26" Width="77"/>
         <Label x:Name="lblCheckIn" Content="Check In:" HorizontalAlignment="Left" Margin="47,157.464,0,134.536" FontWeight="Bold" Grid.Column="1" Width="61"/>
         <Label x:Name="lblCheckOut" Content="Check Out:" HorizontalAlignment="Left" Margin="47,188.464,0,0" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1" Height="26" Width="71" d:LayoutOverrides="HorizontalAlignment"/>
