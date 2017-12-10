@@ -112,7 +112,8 @@ namespace Group03
                     return;
                 }
 
-                lblRoomType = New_Reservation.Room_Type;
+                // ken check ini
+                // lblRoomType = New_Reservation.Room_Type;
 
             }
 
