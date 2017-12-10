@@ -22,6 +22,8 @@ namespace Group03
     public partial class New_Reservation : Window
     {
         List<Room> roomList;
+        Quote myquote { get; set; }
+
         public New_Reservation()
         {
             InitializeComponent();
@@ -116,6 +118,7 @@ namespace Group03
                 return;
             }
 
+
             //Store no of rooms
             NoOfRooms = Convert.ToInt32(txtNoOfRooms.Text.Trim());
 
@@ -132,7 +135,13 @@ namespace Group03
                     RatePerNight = r.Price;
                 }
             }
+            
+            //Insert data to the constructor
+             myquote = new Quote(cbxRoomType.Text, Convert.ToInt32(txtNoOfRooms.Text.Trim()), 
+                dtpCheckIn.SelectedDate.ToString(), dtpCheckOut.SelectedDate.ToString(),
+                ((NoOfNights * RatePerNight * NoOfRooms) + ((NoOfNights * RatePerNight * NoOfRooms) * 0.07) + (10 * NoOfNights)));
 
+            
 
             //Calculate quote variables and output them
             lblNoOfNightsOut.Content = NoOfNights;
@@ -154,7 +163,7 @@ namespace Group03
         //When the Create Reservation is clicked
         private void btnReservation_Click(object sender, RoutedEventArgs e)
         {
-            New_Reservation_2 CompleteReservation = new New_Reservation_2();
+            New_Reservation_2 CompleteReservation = new New_Reservation_2(myquote);
             CompleteReservation.Show();
             this.Close();
         }

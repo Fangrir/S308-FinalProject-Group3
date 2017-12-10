@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Group03
 {
-    class Quote
+    public class Quote
     {
         public string RoomType { get; set; }
 
@@ -18,6 +18,15 @@ namespace Group03
 
         public double TotalPrice { get; set; }
 
+        public Quote()
+        {
+            RoomType = "";
+            NoOfRoom = 0;
+            CheckInDate = "";
+            CheckOutDate = "";
+            TotalPrice = 0;
+        }
+
         public Quote(string room_type, int No_Of_Room, string checkin, string checkout, double totalprice)
         {
             RoomType = room_type;
@@ -27,14 +36,6 @@ namespace Group03
             TotalPrice = totalprice;
         }
 
-        public Quote()
-        {
-            RoomType = "";
-            NoOfRoom = 0;
-            CheckInDate = "";
-            CheckOutDate = "";
-            TotalPrice = 0;
-        }
 
     }
 }

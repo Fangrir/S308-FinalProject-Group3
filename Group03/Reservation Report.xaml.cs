@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Group03
 {
@@ -19,9 +21,20 @@ namespace Group03
     /// </summary>
     public partial class Reservation_Report : Window
     {
+        List<Reservation> reservationList;
+
         public Reservation_Report()
         {
             InitializeComponent();
+
+            // create a room lists
+            reservationList = new List<Reservation>();
+
+            // point data grid source to list
+            dtgReservation.ItemsSource = reservationList;
+
+            // load file from json and insert into data grid
+            LoadFromJson();
         }
 
         private void txtResult_TextChanged()
@@ -35,5 +48,32 @@ namespace Group03
             MW.Show();
             this.Close();
         }
+
+        private void LoadFromJson()
+        {
+            string strFilePath = @"..\..\Data\Reservations.json";
+
+            // read and try to import JSON data into roomList
+            try
+            {
+                StreamReader reader = new StreamReader(strFilePath);
+                string jsonData = reader.ReadToEnd();
+                reader.Close();
+
+                reservationList = JsonConvert.DeserializeObject<List<Reservation>>(jsonData);
+
+                dtgReservation.ItemsSource = reservationList;
+            }
+
+            // if an error occurs print out error message
+            catch (Exception ex)
+            {
+                MessageBox.Show("Import failed: " + ex.Message);
+            }
+
+            // refresh the data grid
+            dtgReservation.Items.Refresh();
+        }
+
     }
 }
