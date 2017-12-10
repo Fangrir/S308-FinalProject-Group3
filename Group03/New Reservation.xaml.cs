@@ -39,6 +39,7 @@ namespace Group03
             if (dtpCheckIn.SelectedDate < DateTime.Today)
             {
                 MessageBox.Show("Please input a valid date");
+                dtpCheckIn.SelectedDate = null;
                 return;
             }
         }
@@ -49,6 +50,7 @@ namespace Group03
             if (dtpCheckOut.SelectedDate < dtpCheckIn.SelectedDate || dtpCheckOut.SelectedDate < DateTime.Today)
             {
                 MessageBox.Show("Please input a valid date");
+                dtpCheckOut.SelectedDate = null;
                 return;
             }
         }
@@ -92,12 +94,14 @@ namespace Group03
             else if (dtpCheckIn.SelectedDate < DateTime.Today)
             {
                 MessageBox.Show("Please input a valid date");
+                dtpCheckIn.SelectedDate = null;
                 return;
             }
             else if (dtpCheckOut.SelectedDate < dtpCheckIn.SelectedDate && 
                 dtpCheckOut.SelectedDate < DateTime.Today)
             {
                 MessageBox.Show("Please input a valid date");
+                dtpCheckOut.SelectedDate = null;
                 return;
             }
             else if (txtNoOfRooms.Text.Trim() == "")
