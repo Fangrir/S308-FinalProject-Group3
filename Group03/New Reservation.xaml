@@ -8,8 +8,8 @@
         Title="Create New Reservation" Height="355.883" Width="528.922" ResizeMode="NoResize">
     <Grid Background="#FFF9F3F3">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="262*"/>
-            <ColumnDefinition Width="261*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="260.961"/>
         </Grid.ColumnDefinitions>
         <GroupBox x:Name="grpReservationInfo" Header="Reservation Details" HorizontalAlignment="Left" Height="204" Margin="13,66,0,0" VerticalAlignment="Top" Width="239" FontWeight="Bold" Background="#FFFFF9F9"/>
 

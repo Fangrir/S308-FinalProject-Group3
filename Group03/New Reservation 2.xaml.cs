@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Group03
 {
@@ -22,6 +24,14 @@ namespace Group03
         public New_Reservation_2()
         {
             InitializeComponent();
+
+            txtFirstName.Text = "";
+            txtLastName.Text = "";
+            txtCardNo.Text = "";
+            txtCardType.Text = "";
+            txtPhone.Text = "";
+            txtEmail.Text = "";
+
         }
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
@@ -104,21 +114,86 @@ namespace Group03
                     return;
                 }
 
-                //validate if email is empty or not contained character "@", validation errors show a pop up message
+                //validate if an optional email conatains @, validation errors show a pop up message
 
-                if (!txtEmail.Text.Contains("@"))
+                if (!txtEmail.Text.Contains("@") && txtEmail.Text !="")
                 {
                     MessageBox.Show("Please provide an email address that contains @");
                     return;
                 }
 
-                lblRoomType = New_Reservation.Room_Type;
+                // PENTING !: DOUBLE CHECK SM KENNY VARIABLENYA
+                lblRoomTypeOut.Content= New_Reservation.Room_Type;
+                lblNoOfRoomsOut.Content = New_Reservation.No_of_Room;
+                lblCheckInOut.Content = New_Reservation.CheckinDate;
+                lblCheckOutOut.Content = New_Reservation.CheckOutDate;
+                lblTotalPriceOut.Content = New_Reservation.totalprice;
 
+                //Store data to Json File
+                ExportToJson();
+
+                //Confirmation Message
+                MessageBox.Show("Your reservation has been confirmed");
+
+                //Back to New Reservation window after a confirmation message has been shown
+                New_Reservation ConfirmReservation = new New_Reservation();
+                ConfirmReservation.Show();
+                this.Close();
+
+        }
+
+
+        private void ImportFromJson()
+        {
+            string strFilePath = @"..\..\Data\Rooms.json"; // PENTING ! CEK SM KENNY NYIMPEN DATA DIMANA
+
+            // read and try to import JSON data into roomList
+            try
+            {
+                StreamReader reader = new StreamReader(strFilePath);
+                string jsonData = reader.ReadToEnd();
+                reader.Close();
+
+                roomList = JsonConvert.DeserializeObject<List<Room>>(jsonData);
+
+                dtgRoomList.ItemsSource = roomList;
             }
+
+            // if an error occurs print out error message
+            catch (Exception ex)
+            {
+                MessageBox.Show("Import failed: " + ex.Message);
+            }
+
+            // refresh the data grid
+            dtgRoomList.Items.Refresh();
+        }
+
+        private void ExportToJson()
+        {
+            string strFilePath = @"..\..\Data\Rooms.json";
+
+            // try to export JSON data from roomList
+            try
+            {
+                StreamWriter writer = new StreamWriter(strFilePath, false);
+                string jsonData = JsonConvert.SerializeObject(roomList);
+                writer.Write(jsonData);
+                writer.Close();
+            }
+
+            // if an error occurs print out error message
+            catch (Exception ex)
+            {
+                MessageBox.Show("Export failed: " + ex.Message);
+            }
+
+            // notify user that the export is completed and show filepath of new file
+            MessageBox.Show("Export successful." + Environment.NewLine + "File Created: " + strFilePath);
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            //if canceled, clear all text box, close new reservation, and open new reservation window
+            //if canceled, clear all text box, close new reservation 2, and open new reservation window
             txtFirstName.Text = "";
             txtLastName.Text = "";
             txtCardNo.Text = "";
