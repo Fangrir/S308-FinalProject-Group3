@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Quote.cs" />
     <Compile Include="Reservation.cs" />
     <Compile Include="Reservation Report.xaml.cs">
       <DependentUpon>Reservation Report.xaml</DependentUpon>
@@ -119,6 +120,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\Reservations.json" />
     <None Include="Data\Rooms.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

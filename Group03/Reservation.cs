@@ -8,20 +8,50 @@ namespace Group03
 {
     class Reservation
     {
-        // check in date
-        public int NoOfNights { get; set; }
-        public string RoomType { get; set; }
-        public int NoOfRooms { get; set; }
-        public double RoomPrice { get; set; }
-        public double SubTotal { get; set; }
-        public double Tax { get; set; }
-        public double Fee { get; set; }
-        public double Total { get; set; }
-        public string FirstName { get; set; }
+        public string CheckinDate { get; set; }
+
+        public string CheckoutDate { get; set; }
+
         public string LastName { get; set; }
-        public string CCType { get; set; }
-        public long CCNo { get; set; }
-        // phone no
+
+        public string FirstName { get; set; }
+
+        public string Phone_Num { get; set; }
+
         public string Email { get; set; }
+
+        public string RoomType { get; set; }
+
+        public int No_of_Room { get; set; }
+
+        public string Total_Price { get; set; }
+       
+        public Reservation()
+        {
+            CheckinDate = "";
+            CheckoutDate = "";
+            FirstName = "";
+            LastName = "";
+            Phone_Num = "";
+            Email = "";
+            RoomType = "";
+            No_of_Room = 0;
+            Total_Price = "";
+        }
+
+        public Reservation(string checkin,string checkout, string firstname, string lastname, string phone_num, string email, string room_type, int no_of_room,
+            string total_price)
+        {
+            CheckinDate = checkin;
+            CheckoutDate = checkout;
+            FirstName = firstname;
+            LastName = lastname;
+            Phone_Num = phone_num;
+            Email = email;
+            RoomType = room_type;
+            No_of_Room = no_of_room;
+            Total_Price = total_price;
+            
+        }
     }
 }
