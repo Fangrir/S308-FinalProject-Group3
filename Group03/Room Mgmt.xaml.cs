@@ -38,7 +38,7 @@ namespace Group03
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            // declare variables
+            // declare variables/
             int intQuantity;
             double dblPrice;
             bool bolEmpty = false; // boolean that is set to true whenever there is an unselected/empty field
