@@ -15,26 +15,26 @@
         <Label x:Name="lblInstructions" Content="Please enter customer information:" HorizontalAlignment="Left" Margin="22,43,0,0" VerticalAlignment="Top" IsEnabled="False" Foreground="#FF0F0A0A" FontWeight="Bold" Height="26" Width="208"/>
         <Label x:Name="lblFirstName" Content="First Name:" HorizontalAlignment="Left" Margin="22,69,0,0" VerticalAlignment="Top" Height="26" Width="70"/>
         <Label x:Name="lblLastName" Content="Last Name:" HorizontalAlignment="Left" Margin="22,100,0,0" VerticalAlignment="Top" Height="26" Width="69"/>
-        <Label x:Name="lblCardType" Content="Credit Card Type:" HorizontalAlignment="Left" Margin="22,132,0,0" VerticalAlignment="Top" Height="26" Width="101"/>
-        <Label x:Name="lblCardNo" Content="Credit Card No:" HorizontalAlignment="Left" Margin="22,164,0,0" VerticalAlignment="Top" Height="26" Width="92"/>
+        <Label x:Name="lblCardType" Content="Credit Card Type:" HorizontalAlignment="Left" Margin="22,162,0,0" VerticalAlignment="Top" Height="26" Width="101"/>
+        <Label x:Name="lblCardNo" Content="Credit Card No:" HorizontalAlignment="Left" Margin="22,129,0,0" VerticalAlignment="Top" Height="26" Width="92"/>
         <Label x:Name="lblEmail" Content="E-mail:" HorizontalAlignment="Left" Margin="22,228,0,0" VerticalAlignment="Top" Height="26" Width="46"/>
         <Label x:Name="lblPhone" Content="Phone:" HorizontalAlignment="Left" Margin="22,196,0,0" VerticalAlignment="Top" Height="26" Width="46"/>
-        <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Height="23" Margin="130.133,73,-24.906,0" TextWrapping="Wrap" Text="Frans" VerticalAlignment="Top" Width="133.734" TabIndex="0" Background="#FFFFF9F9"/>
-        <TextBox x:Name="txtLastName" HorizontalAlignment="Left" Height="23" Margin="130.133,103,-24.906,0" TextWrapping="Wrap" Text="Tjandra" VerticalAlignment="Top" Width="133.734" TabIndex="1" Background="#FFFFF9F9"/>
-        <TextBox x:Name="txtCardType" HorizontalAlignment="Left" Height="23" Margin="130.133,135,-24.906,0" TextWrapping="Wrap" Text="VISA" VerticalAlignment="Top" Width="133.734" TabIndex="2" Background="#FFFFF9F9"/>
-        <TextBox x:Name="txtCardNo" HorizontalAlignment="Left" Height="23" Margin="130.133,167,-24.906,0" TextWrapping="Wrap" Text="4852 4562 9563 4555" VerticalAlignment="Top" Width="133.734" TabIndex="3" Background="#FFFFF9F9"/>
-        <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="23" Margin="130.133,199,-24.906,0" TextWrapping="Wrap" Text="(925) 332-9480" VerticalAlignment="Top" Width="133.734" TabIndex="4" Background="#FFFFF9F9"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="130.133,231,-24.906,0" TextWrapping="Wrap" Text="fndra@umail.iu.edu" VerticalAlignment="Top" Width="133.734" TabIndex="5" Background="#FFFFF9F9"/>
-        <Button x:Name="btnConfirm" Content="Confirm Reservation" HorizontalAlignment="Left" Margin="85,276,0,0" VerticalAlignment="Top" Width="128" TabIndex="6" Height="20" FontWeight="Bold" BorderThickness="0.1"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="85,276,0,0" VerticalAlignment="Top" Width="84" TabIndex="7" Grid.Column="1" Height="20" FontWeight="Bold" BorderThickness="0.1"/>
+        <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Height="23" Margin="130.133,73,-24.906,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133.734" TabIndex="0" Background="#FFFFF9F9"/>
+        <TextBox x:Name="txtLastName" HorizontalAlignment="Left" Height="23" Margin="130.133,103,-24.906,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133.734" TabIndex="1" Background="#FFFFF9F9"/>
+        <TextBox x:Name="txtCardType" HorizontalAlignment="Left" Height="22" Margin="130,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" TabIndex="2" Background="#FFFFF9F9" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtCardNo" HorizontalAlignment="Left" Height="23" Margin="130,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" TabIndex="3" Background="#FFFFF9F9" Grid.ColumnSpan="2" BorderBrush="#FFABADB3"/>
+        <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="23" Margin="130.133,199,-24.906,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133.734" TabIndex="4" Background="#FFFFF9F9"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="130.133,231,-24.906,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133.734" TabIndex="5" Background="#FFFFF9F9"/>
+        <Button x:Name="btnConfirm" Content="Confirm Reservation" HorizontalAlignment="Left" Margin="85,276,0,0" VerticalAlignment="Top" Width="128" TabIndex="6" Height="20" FontWeight="Bold" BorderThickness="0.1" Click="btnConfirm_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="85,276,0,0" VerticalAlignment="Top" Width="84" TabIndex="7" Grid.Column="1" Height="20" FontWeight="Bold" BorderThickness="0.1" Click="btnCancel_Click"/>
         <Label x:Name="lblRoomType" Content="Room Type:" HorizontalAlignment="Left" Margin="47,103,0,0" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1" Height="26" Width="77"/>
         <Label x:Name="lblCheckIn" Content="Check In:" HorizontalAlignment="Left" Margin="47,157.464,0,134.536" FontWeight="Bold" Grid.Column="1" Width="61"/>
         <Label x:Name="lblCheckOut" Content="Check Out:" HorizontalAlignment="Left" Margin="47,188.464,0,0" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1" Height="26" Width="71" d:LayoutOverrides="HorizontalAlignment"/>
         <Label x:Name="lblTotalPrice" Content="Total Price:" HorizontalAlignment="Left" Margin="47,219.464,0,0" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1" Height="26" Width="72" d:LayoutOverrides="HorizontalAlignment"/>
-        <Label x:Name="lblRoomTypeOut" Content="Deluxe King" HorizontalAlignment="Left" Margin="142.872,103,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="73"/>
-        <Label x:Name="lblCheckInOut" Content="11/9/2017" HorizontalAlignment="Left" Margin="142.872,157.464,0,134.536" Width="73" Grid.Column="1"/>
-        <Label x:Name="lblCheckOutOut" Content="11/11/2017" HorizontalAlignment="Left" Margin="142.872,188.464,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="71"/>
-        <Label x:Name="lblTotalPriceOut" Content="$ 1,304" HorizontalAlignment="Left" Margin="142.872,219.503,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="69.907" RenderTransformOrigin="0.5,0.5">
+        <Label x:Name="lblRoomTypeOut" Content="" HorizontalAlignment="Left" Margin="142.872,103,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="73"/>
+        <Label x:Name="lblCheckInOut" Content="" HorizontalAlignment="Left" Margin="142.872,157.464,0,134.536" Width="73" Grid.Column="1"/>
+        <Label x:Name="lblCheckOutOut" Content="" HorizontalAlignment="Left" Margin="142.872,188.464,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="71"/>
+        <Label x:Name="lblTotalPriceOut" Content="" HorizontalAlignment="Left" Margin="142.872,219.503,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="69.907" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -53,7 +53,7 @@
             </Label.Background>
         </Label>
         <Label x:Name="lblNoOfRooms" Content="No. of Rooms:" HorizontalAlignment="Left" Margin="47,129,0,0" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1" Height="26" Width="92.88"/>
-        <Label x:Name="lblNoOfRoomsOut" Content="2" HorizontalAlignment="Left" Margin="142.872,129,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="73"/>
+        <Label x:Name="lblNoOfRoomsOut" Content="" HorizontalAlignment="Left" Margin="142.872,129,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="73"/>
 
     </Grid>
 </Window>
