@@ -24,8 +24,6 @@ namespace Group03
 
         public int No_of_Room { get; set; }
 
-        public string Room_Price { get; set; }
-
         public string Total_Price { get; set; }
        
         public Reservation()
@@ -39,7 +37,6 @@ namespace Group03
             RoomType = "";
             No_of_Room = 0;
             Total_Price = "";
-            Room_Price = "";
         }
 
         public Reservation(string checkin,string checkout, string firstname, string lastname, string phone_num, string email, string room_type, int no_of_room,
@@ -52,6 +49,7 @@ namespace Group03
             Phone_Num = phone_num;
             Email = email;
             RoomType = room_type;
+            No_of_Room = no_of_room;
             Total_Price = total_price;
             
         }

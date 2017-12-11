@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace Group03
 {
@@ -36,10 +37,26 @@ namespace Group03
             // load file from json and insert into data grid
             LoadFromJson();
         }
-
-        private void txtResult_TextChanged()
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
+            
 
+            DateTime dtCheckinDate = new DateTime();
+            DateTime dtCheckOutDate = new DateTime();
+
+            string strLastName;
+
+            strLastName = txtLastName.Text.Trim();
+
+            dtgReservation.ItemsSource = "";
+
+            var ReservationSearch = reservationList.Where(r =>
+                r.LastName.StartsWith(strLastName));
+
+            foreach (Reservation r in ReservationSearch)
+            {
+                dtgReservation.Items.Add(r.LastName);
+            }
         }
 
         private void btnMainMenu_Click(object sender, RoutedEventArgs e)

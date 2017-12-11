@@ -66,9 +66,40 @@ namespace Group03
             //create reservation list
             reservationlist = new List<Reservation>();
         }
+        private void CardNumber_TextChange(object sender, TextChangedEventArgs e)
+        {
+            //Credit card validation variables
+            string strCardNum = txtCardNo.Text.Trim().Replace(" ", "");
+            string strCardType;
+
+            //Look up the card type value
+            if (strCardNum.StartsWith("34") || strCardNum.StartsWith("37"))
+            {
+                strCardType = "AMEX";
+            }
+            else if (strCardNum.StartsWith("6011"))
+            {
+                strCardType = "Discover";
+            }
+            else if (strCardNum.StartsWith("51") || strCardNum.StartsWith("52") || strCardNum.StartsWith("53") || strCardNum.StartsWith("54") || strCardNum.StartsWith("55"))
+            {
+                strCardType = "MasterCard";
+            }
+            else if (strCardNum.StartsWith("4"))
+            {
+                strCardType = "VISA";
+            }
+            else
+            {
+                strCardType = "Unknown Card Type";
+            }
+
+            txtCardType.Text = strCardType;
+        }
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
+            string strCardNum = txtCardNo.Text.Trim().Replace(" ", "");
             string FirstName;
             string LastName;
             string CardNo;
@@ -76,6 +107,13 @@ namespace Group03
             string Email;
             string CheckInDate;
             string CheckOutDate;
+
+            //Validate card number
+            long lngOut;
+            bool bolValid = false;
+            int i;
+            int intCheckDigit;
+            int intCheckSum = 0;
 
             DateTime CheckIn = new DateTime();
             DateTime CheckOut = new DateTime();
@@ -94,6 +132,7 @@ namespace Group03
                 MessageBox.Show("Please provide your first name without containing numbers");
                 return;
             }
+
             //Validate if last name is empty or numbers, validation errors show a pop up message
             if (txtLastName.Text.Trim() == "")
             {
@@ -105,40 +144,51 @@ namespace Group03
                 MessageBox.Show("Please provide customer last name without containing numbers");
                 return;
             }
-            //Validate if credit card number is empty, not numbers ,and the format not matched with VISA, MASTERCARD, DISCOVER or AMERICAN EXPRESS. Validation errors show a pop up message
-            if (txtCardNo.Text.Trim() == "")
+
+            //validate if card number is empty
+            if (!Int64.TryParse(strCardNum, out lngOut))
             {
-                MessageBox.Show("Please provide a credit card number");
+                MessageBox.Show("Credit card numbers contain only numbers.");
                 return;
             }
 
-            if (!double.TryParse(txtCardNo.Text, out dblNum))
+            //Validate the card number length
+            if (strCardNum.Length != 13 && strCardNum.Length != 15 && strCardNum.Length != 16)
             {
-                MessageBox.Show("Please provide a credit card number with numbers only");
+                MessageBox.Show("Credit card numbers must contain 13, 15, or 16 digits.");
                 return;
             }
+            //Validate the card number
+            strCardNum = ReverseString(strCardNum);
 
-            //if (txtCardNo.Text.Trim().Length == 16 && txtCardNo.Text.Trim().StartsWith("4"))
-            //{
-            //    txtCardType.Text = "VISA";
-            //}
-            //else if (txtCardNo.Text.Trim().Length == 16 && txtCardNo.Text.Trim().StartsWith("6"))
-            //{
-            //    txtCardType.Text = "DISCOVER";
-            //}
-            //else if (txtCardNo.Text.Trim().Length == 15 && txtCardNo.Text.Trim().StartsWith("3") && (txtCardNo.Text.Trim().Substring(1, 1) == "4" || txtCardNo.Text.Trim().Substring(1, 1) == "7"))
-            //{
-            //    txtCardType.Text = "AMEX";
-            //}
-            //else if (txtCardNo.Text.Trim().Length == 16 && (txtCardNo.Text.Trim().StartsWith("6") || txtCardNo.Text.Trim().StartsWith("2")))
-            //{
-            //    txtCardType.Text = "MASTERCARD";
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Please provide a valid card type of VISA, DISCOVER, AMEX, OR MASTERCARD");
-            //    return;
-            //}
+            for (i = 0; i < strCardNum.Length; i++)
+            {
+                intCheckDigit = Convert.ToInt32(strCardNum.Substring(i, 1));
+
+                if ((i + 1) % 2 == 0)
+                {
+                    intCheckDigit *= 2;
+
+                    if (intCheckDigit > 9)
+                    {
+                        intCheckDigit -= 9;
+                    }
+                }
+
+                intCheckSum += intCheckDigit;
+            }
+
+            if (intCheckSum % 10 == 0)
+            {
+                bolValid = true;
+            }
+
+            //if the credit card not valid
+            if (!bolValid)
+            {
+                MessageBox.Show("Card is not valid");
+                return;
+            }
 
             //Validate if phone number is empty, not numbers. Validation errors show a pop up message
             if (txtPhone.Text.Trim() == "")
@@ -183,13 +233,18 @@ namespace Group03
 
             //Add the reservation to the reservation list
             Reservation newReservation = new Reservation(CheckInDate, CheckOutDate,
-                FirstName, LastName, PhoneNumber, Email, lblRoomTypeOut.Content.ToString(), Convert.ToInt32(lblNoOfRoomsOut.Content),
+                FirstName, LastName, PhoneNumber, Email, lblRoomTypeOut.Content.ToString(), CurrentQuote.NoOfRoom,
                 lblTotalPriceOut.Content.ToString());
 
             reservationlist.Add(newReservation);
 
             //Save to json file
             SaveToJson();
+
+            //Return to main Menu
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -221,6 +276,15 @@ namespace Group03
             // notify user that the export is completed and show filepath of new file
             MessageBox.Show("Export successful." + Environment.NewLine + "File Created: " + strFilePath);
         }
+
+        //reverse string method
+        private static string ReverseString(string s)
+        {
+            char[] array = s.ToCharArray();
+            Array.Reverse(array);
+            return new string(array);
+        }
+
 
     }
 }

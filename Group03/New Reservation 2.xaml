@@ -20,12 +20,12 @@
         <Label x:Name="lblPhone" Content="Phone:" HorizontalAlignment="Left" Margin="22,196,0,0" VerticalAlignment="Top" Height="26" Width="46"/>
         <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Height="23" Margin="123,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TabIndex="0" Background="#FFFFF9F9"/>
         <TextBox x:Name="txtLastName" HorizontalAlignment="Left" Height="23" Margin="123,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TabIndex="1" Background="#FFFFF9F9"/>
-        <TextBox x:Name="txtCardType" HorizontalAlignment="Left" Height="22" Margin="123,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TabIndex="2" Background="#FFFFF9F9"/>
-        <TextBox x:Name="txtCardNo" HorizontalAlignment="Left" Height="23" Margin="123,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TabIndex="3" Background="#FFFFF9F9" BorderBrush="#FFABADB3"/>
-        <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="23" Margin="123,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TabIndex="4" Background="#FFFFF9F9"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="123,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TabIndex="5" Background="#FFFFF9F9"/>
-        <Button x:Name="btnConfirm" Content="Confirm Reservation" HorizontalAlignment="Left" Margin="381,276,0,0" VerticalAlignment="Top" Width="128" TabIndex="6" Height="20" FontWeight="Bold" BorderThickness="0.1" Click="btnConfirm_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="156,276,0,0" VerticalAlignment="Top" Width="84" TabIndex="7" Height="20" FontWeight="Bold" BorderThickness="0.1" Click="btnCancel_Click"/>
+        <TextBox x:Name="txtCardType" HorizontalAlignment="Left" Height="22" Margin="123,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TabIndex="4000000" Background="#FFFFF9F9" IsReadOnly="True"/>
+        <TextBox x:Name="txtCardNo" HorizontalAlignment="Left" Height="23" Margin="123,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TabIndex="2" Background="#FFFFF9F9" BorderBrush="#FFABADB3" TextChanged="CardNumber_TextChange"/>
+        <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="23" Margin="123,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TabIndex="3" Background="#FFFFF9F9"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="123,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TabIndex="4" Background="#FFFFF9F9"/>
+        <Button x:Name="btnConfirm" Content="Confirm Reservation" HorizontalAlignment="Left" Margin="381,276,0,0" VerticalAlignment="Top" Width="128" TabIndex="5" Height="20" FontWeight="Bold" BorderThickness="0.1" Click="btnConfirm_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="156,276,0,0" VerticalAlignment="Top" Width="84" TabIndex="6" Height="20" FontWeight="Bold" BorderThickness="0.1" Click="btnCancel_Click"/>
         <Label x:Name="lblRoomType" Content="Room Type:" HorizontalAlignment="Left" Margin="324,103,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="77"/>
         <Label x:Name="lblCheckIn" Content="Check In:" HorizontalAlignment="Left" Margin="324,157,0,135" FontWeight="Bold" Width="61"/>
         <Label x:Name="lblCheckOut" Content="Check Out:" HorizontalAlignment="Left" Margin="324,188,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="71"/>
