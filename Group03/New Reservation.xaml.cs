@@ -24,6 +24,9 @@ namespace Group03
         List<Room> roomList;
         Quote myquote { get; set; }
 
+        // boolean variable used to keep track whether a quote has been made or not
+        bool bolQuote = false;
+
         public New_Reservation()
         {
             InitializeComponent();
@@ -163,6 +166,9 @@ namespace Group03
             lblTaxOut.Content = "$" + String.Format("{0:n}", ((NoOfNights * RatePerNight * NoOfRooms) * 0.07));
             lblConvFeeOut.Content = "$" + String.Format("{0:n}", (10 * NoOfNights * NoOfRooms));
             lblTotalOut.Content = "$" + String.Format("{0:n}", ((NoOfNights * RatePerNight * NoOfRooms) + ((NoOfNights * RatePerNight * NoOfRooms) * 0.07) + (10 * NoOfNights)));
+
+            // set bolQuote to true
+            bolQuote = true;
         }
 
         //When the Main Menu is clicked
@@ -176,6 +182,13 @@ namespace Group03
         //When the Create Reservation is clicked
         private void btnReservation_Click(object sender, RoutedEventArgs e)
         {
+            // if bolQuote is false, display an error message
+            if (bolQuote == false)
+            {
+                MessageBox.Show("A quote must be created before a reservation can be made.");
+                return;
+            }
+
             New_Reservation_2 CompleteReservation = new New_Reservation_2(myquote);
             CompleteReservation.Show();
             this.Close();

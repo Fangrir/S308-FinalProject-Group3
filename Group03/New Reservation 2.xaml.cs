@@ -80,7 +80,6 @@ namespace Group03
             DateTime CheckIn = new DateTime();
             DateTime CheckOut = new DateTime();
 
-
             //Parse Variable
             double dblNum;
 
