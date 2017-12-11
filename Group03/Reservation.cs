@@ -8,9 +8,9 @@ namespace Group03
 {
     class Reservation
     {
-        public string CheckinDate { get; set; }
+        public DateTime CheckinDate { get; set; }
 
-        public string CheckoutDate { get; set; }
+        public DateTime CheckoutDate { get; set; }
 
         public string LastName { get; set; }
 
@@ -28,8 +28,8 @@ namespace Group03
        
         public Reservation()
         {
-            CheckinDate = "";
-            CheckoutDate = "";
+            CheckinDate = default(DateTime);
+            CheckoutDate = default(DateTime);
             FirstName = "";
             LastName = "";
             Phone_Num = "";
@@ -39,7 +39,7 @@ namespace Group03
             Total_Price = "";
         }
 
-        public Reservation(string checkin,string checkout, string firstname, string lastname, string phone_num, string email, string room_type, int no_of_room,
+        public Reservation(DateTime checkin, DateTime checkout, string firstname, string lastname, string phone_num, string email, string room_type, int no_of_room,
             string total_price)
         {
             CheckinDate = checkin;

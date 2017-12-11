@@ -40,7 +40,7 @@ namespace Group03
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             
-
+            //Date Time variable
             DateTime dtCheckinDate = new DateTime();
             DateTime dtCheckOutDate = new DateTime();
 
@@ -48,17 +48,71 @@ namespace Group03
 
             strLastName = txtLastName.Text.Trim();
 
+            //Remove the item source first
             dtgReservation.ItemsSource = "";
 
-            var ReservationSearch = reservationList.Where(r =>
+            //if the date range is not available but the lastname input is not blank
+            if(txtLastName.Text.Trim() == "" && dtpStartDate.SelectedDate.Value != null && dtpEndDate.SelectedDate.Value != null)
+            {
+                dtCheckinDate = dtpStartDate.SelectedDate.Value.Date;
+                dtCheckOutDate = dtpEndDate.SelectedDate.Value.Date;
+
+                var ReservationSearch = reservationList.Where(r =>
+                r.CheckinDate >= dtCheckinDate &&
+                r.CheckoutDate <= dtCheckOutDate);
+
+                foreach (Reservation r in ReservationSearch)    
+                {
+                    dtgReservation.ItemsSource = ReservationSearch.ToList();
+                }
+            }
+
+            //if the lastname text is blank
+            else if(dtpStartDate.SelectedDate.ToString() == "" && dtpEndDate.SelectedDate.ToString() == ""
+                && txtLastName.Text.Trim() != "")
+            {
+                var ReservationSearch = reservationList.Where(r =>
                 r.LastName.StartsWith(strLastName));
 
-            foreach (Reservation r in ReservationSearch)
-            {
-                dtgReservation.Items.Add(r.LastName);
+                foreach (Reservation r in ReservationSearch)
+                {
+                    dtgReservation.ItemsSource = ReservationSearch.ToList();
+                }
+                if (ReservationSearch.ToString() == "")
+                {
+                    MessageBox.Show("No record found. Pleaase check your input");
+                }
             }
+
+            //if none of the input is blank
+            else if(dtpStartDate.SelectedDate.ToString() != "" && dtpEndDate.SelectedDate.ToString() != "" && txtLastName.Text != "")
+            {
+                dtCheckinDate = dtpStartDate.SelectedDate.Value.Date;
+                dtCheckOutDate = dtpEndDate.SelectedDate.Value.Date;
+
+                var ReservationSearch = reservationList.Where(r =>
+                r.CheckinDate >= dtCheckinDate &&
+                r.CheckoutDate <= dtCheckOutDate &&
+                r.LastName.StartsWith(strLastName));
+
+                foreach (Reservation r in ReservationSearch)
+                {
+                    dtgReservation.ItemsSource = ReservationSearch.ToList();
+                }
+
+                if( ReservationSearch.ToString() == "")
+                {
+                    MessageBox.Show("No record found. Pleaase check your input");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please check your input again");
+            }
+
         }
 
+        //When the main menu button is clicked
         private void btnMainMenu_Click(object sender, RoutedEventArgs e)
         {
             MainWindow MW = new MainWindow();
@@ -66,6 +120,7 @@ namespace Group03
             this.Close();
         }
 
+        //Load the file to the data grid
         private void LoadFromJson()
         {
             string strFilePath = @"..\..\Data\Reservations.json";

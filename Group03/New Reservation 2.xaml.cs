@@ -105,8 +105,8 @@ namespace Group03
             string CardNo;
             string PhoneNumber;
             string Email;
-            string CheckInDate;
-            string CheckOutDate;
+            DateTime CheckInDate;
+            DateTime CheckOutDate;
 
             //Validate card number
             long lngOut;
@@ -225,10 +225,10 @@ namespace Group03
             Email = txtEmail.Text.Trim();
 
             CheckIn = Convert.ToDateTime(lblCheckInOut.Content);
-            CheckOutDate = CheckIn.ToString("MM/dd/yyyy");
+            CheckOutDate = CheckIn.Date;
 
             CheckOut = Convert.ToDateTime(lblCheckOutOut.Content);
-            CheckInDate = CheckOut.ToString("MM/dd/yyyy");
+            CheckInDate = CheckOut.Date;
 
 
             //Add the reservation to the reservation list
