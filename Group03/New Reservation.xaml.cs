@@ -33,16 +33,14 @@ namespace Group03
 
             // load rooms data from json and insert into list
             LoadFromJson();
-
-
         }
         
         //When the users select a checkin date
         private void dtpCheckIn_SelectedDateChange(object sender, SelectionChangedEventArgs e)
         {
-            if (dtpCheckIn.SelectedDate < DateTime.Today)
+            if (dtpCheckIn.SelectedDate < DateTime.Today || dtpCheckIn.SelectedDate > dtpCheckOut.SelectedDate)
             {
-                MessageBox.Show("Please input a valid date");
+                MessageBox.Show("Please input a valid check in date.");
                 dtpCheckIn.SelectedDate = null;
                 return;
             }
@@ -53,7 +51,7 @@ namespace Group03
         {
             if (dtpCheckOut.SelectedDate < dtpCheckIn.SelectedDate || dtpCheckOut.SelectedDate < DateTime.Today)
             {
-                MessageBox.Show("Please input a valid date");
+                MessageBox.Show("Please input a valid check out date.");
                 dtpCheckOut.SelectedDate = null;
                 return;
             }
@@ -69,55 +67,72 @@ namespace Group03
             int NoOfRooms;
             int NoOfNights;
 
+            int a;
+
             //double variable
             double RatePerNight = 0;
 
+            // variables to check empty fields
+            bool bolEmpty = false; // boolean that is set to true whenever there is an unselected/empty field
+            string strEmpty = ""; // string used to add fields that will be displayed whenever they are empty
+
+            // check for empty fields
             if (cbxRoomType.SelectedIndex == -1)
             {
-                //if a room type is not selected
-                MessageBox.Show("Please choose a room type");
-                return;
+                bolEmpty = true;
+                strEmpty = "room type";
             }
-            else if (txtNoOfRooms.Text.Trim() == "")
+
+            if (txtNoOfRooms.Text.Trim() == "")
             {
-                MessageBox.Show("Room number cannot be blank");
-                return;
+                if (bolEmpty == true)
+                    strEmpty = strEmpty + ", no of rooms";
+
+                else
+                {
+                    bolEmpty = true;
+                    strEmpty = "no of rooms";
+                }
             }
-            else if (dtpCheckIn.SelectedDate.ToString() == "")
+
+            if (dtpCheckIn.SelectedDate.ToString() == "")
             {
-                MessageBox.Show("Please select a check in date!");
-                return;
+                if (bolEmpty == true)
+                    strEmpty = strEmpty + ", check in date";
+                
+                else
+                {
+                    bolEmpty = true;
+                    strEmpty = "check in date";
+                }
             }
-            else if (dtpCheckOut.SelectedDate.ToString() == "")
+
+            if (dtpCheckOut.SelectedDate.ToString() == "")
             {
-                MessageBox.Show("Please select a check out date!");
+                if (bolEmpty == true)
+                    strEmpty = strEmpty + ", check out date";
+
+                else
+                {
+                    bolEmpty = true;
+                    strEmpty = "check out date";
+                }
+            }
+
+            // if bolEmpty is true, display message showing all empty fields that needs to be sorted out
+            if (bolEmpty == true)
+            {
+                MessageBox.Show("The field(s) " + strEmpty + " cannot be empty.");
                 return;
             }
 
-            else if (dtpCheckIn.SelectedDate < DateTime.Today)
-            {
-                MessageBox.Show("Please input a valid date");
-                dtpCheckIn.SelectedDate = null;
-                return;
-            }
-            else if (dtpCheckOut.SelectedDate < dtpCheckIn.SelectedDate && 
-                dtpCheckOut.SelectedDate < DateTime.Today)
-            {
-                MessageBox.Show("Please input a valid date");
-                dtpCheckOut.SelectedDate = null;
-                return;
-            }
-            else if (txtNoOfRooms.Text.Trim() == "")
-            {
-                MessageBox.Show("Please input the number of room");
-                return;
-            }
-            else if(!Int32.TryParse(txtNoOfRooms.Text.Trim(), out int a ))
-            {
-                MessageBox.Show("Please input a valid number of rooms");
-                return;
-            }
 
+            // check if no of rooms is an integer
+            if (!Int32.TryParse(txtNoOfRooms.Text.Trim(), out a))
+            {
+                MessageBox.Show("Number of rooms must be a whole number.");
+                return;
+            }
 
             //Store no of rooms
             NoOfRooms = Convert.ToInt32(txtNoOfRooms.Text.Trim());
@@ -140,8 +155,6 @@ namespace Group03
              myquote = new Quote(cbxRoomType.Text, Convert.ToInt32(txtNoOfRooms.Text.Trim()), 
                 dtpCheckIn.SelectedDate.ToString(), dtpCheckOut.SelectedDate.ToString(),
                 ((NoOfNights * RatePerNight * NoOfRooms) + ((NoOfNights * RatePerNight * NoOfRooms) * 0.07) + (10 * NoOfNights)));
-
-            
 
             //Calculate quote variables and output them
             lblNoOfNightsOut.Content = NoOfNights;
@@ -185,7 +198,7 @@ namespace Group03
             // if an error occurs print out error message
             catch (Exception ex)
             {
-                MessageBox.Show("Import failed: " + ex.Message);
+                MessageBox.Show("Failed to import Room data: " + ex.Message);
             }
         }
 
