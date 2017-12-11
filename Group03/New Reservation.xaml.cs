@@ -22,7 +22,7 @@ namespace Group03
     public partial class New_Reservation : Window
     {
         List<Room> roomList;
-        Quote myquote { get; set; }
+        Quote MyQuote { get; set; }
 
         // boolean variable used to keep track whether a quote has been made or not
         bool bolQuote = false;
@@ -155,9 +155,9 @@ namespace Group03
             }
             
             //Insert data to the constructor
-             myquote = new Quote(cbxRoomType.Text, Convert.ToInt32(txtNoOfRooms.Text.Trim()), 
+             MyQuote = new Quote(cbxRoomType.Text, Convert.ToInt32(txtNoOfRooms.Text.Trim()), 
                 dtpCheckIn.SelectedDate.ToString(), dtpCheckOut.SelectedDate.ToString(),
-                ((NoOfNights * RatePerNight * NoOfRooms) + ((NoOfNights * RatePerNight * NoOfRooms) * 0.07) + (10 * NoOfNights)));
+                ((NoOfNights * RatePerNight * NoOfRooms) + ((NoOfNights * RatePerNight * NoOfRooms) * 0.07) + (10 * NoOfNights)), NoOfNights);
 
             //Calculate quote variables and output them
             lblNoOfNightsOut.Content = NoOfNights;
@@ -189,7 +189,7 @@ namespace Group03
                 return;
             }
 
-            New_Reservation_2 CompleteReservation = new New_Reservation_2(myquote);
+            New_Reservation_2 CompleteReservation = new New_Reservation_2(MyQuote);
             CompleteReservation.Show();
             this.Close();
         }

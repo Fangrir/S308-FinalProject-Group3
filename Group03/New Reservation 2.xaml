@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Group03"
         mc:Ignorable="d"
-        Title="Customer Info" Height="343.883" Width="607.922" ResizeMode="NoResize" Foreground="White">
+        Title="Customer Info" Height="343.883" Width="607.922" ResizeMode="NoResize" Foreground="White" WindowStartupLocation="CenterScreen">
     <Grid Height="318" VerticalAlignment="Top" Margin="0,0,0,-3" Background="#FFF9F3F3">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -29,7 +29,7 @@
         <Label x:Name="lblRoomType" Content="Room Type:" HorizontalAlignment="Left" Margin="324,103,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="77"/>
         <Label x:Name="lblCheckIn" Content="Check In:" HorizontalAlignment="Left" Margin="324,157,0,135" FontWeight="Bold" Width="61"/>
         <Label x:Name="lblCheckOut" Content="Check Out:" HorizontalAlignment="Left" Margin="324,188,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="71"/>
-        <Label x:Name="lblTotalPrice" Content="Total Price:" HorizontalAlignment="Left" Margin="324,219,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="72"/>
+        <Label x:Name="lblTotalPrice" Content="Total Cost:" HorizontalAlignment="Left" Margin="324,219,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="72"/>
         <Label x:Name="lblRoomTypeOut" Content="" HorizontalAlignment="Left" Margin="420,103,0,0" VerticalAlignment="Top" Height="26" Width="147"/>
         <Label x:Name="lblCheckInOut" Content="" HorizontalAlignment="Left" Margin="420,157,0,135" Width="147"/>
         <Label x:Name="lblCheckOutOut" Content="" HorizontalAlignment="Left" Margin="420,188,0,0" VerticalAlignment="Top" Height="26" Width="143"/>

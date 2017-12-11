@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Group03"
         mc:Ignorable="d"
-        Title="Reservation_Report" Height="550" Width="817">
+        Title="Reservation_Report" Height="550" Width="817" WindowStartupLocation="CenterScreen">
     <Grid x:Name="grid" Margin="0,0,2,0" Height="519" VerticalAlignment="Top" Background="#FFF9F3F3">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="365*"/>
