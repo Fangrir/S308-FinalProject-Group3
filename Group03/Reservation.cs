@@ -28,8 +28,8 @@ namespace Group03
        
         public Reservation()
         {
-            CheckinDate = default(DateTime);
-            CheckoutDate = default(DateTime);
+            CheckinDate = default(DateTime).Date;
+            CheckoutDate = default(DateTime).Date;
             FirstName = "";
             LastName = "";
             Phone_Num = "";
@@ -42,8 +42,8 @@ namespace Group03
         public Reservation(DateTime checkin, DateTime checkout, string firstname, string lastname, string phone_num, string email, string room_type, int no_of_room,
             string total_price)
         {
-            CheckinDate = checkin;
-            CheckoutDate = checkout;
+            CheckinDate = checkin.Date;
+            CheckoutDate = checkout.Date;
             FirstName = firstname;
             LastName = lastname;
             Phone_Num = phone_num;

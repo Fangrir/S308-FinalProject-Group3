@@ -44,8 +44,8 @@ namespace Group03
             //Show data from previous window
             lblNoOfRoomsOut.Content = CurrentQuote.NoOfRoom.ToString();
             lblRoomTypeOut.Content = CurrentQuote.RoomType.ToString();
-            lblCheckInOut.Content = CurrentQuote.CheckInDate.ToString();
-            lblCheckOutOut.Content = CurrentQuote.CheckOutDate.ToString();
+            lblCheckInOut.Content = CurrentQuote.CheckInDate.ToString("MM/dd/yyyy");
+            lblCheckOutOut.Content = CurrentQuote.CheckOutDate.ToString("MM/dd/yyyy");
             lblTotalPriceOut.Content = "$" + String.Format("{0:n}", CurrentQuote.TotalPrice.ToString());
 
             //create reservation list
@@ -244,15 +244,15 @@ namespace Group03
             PhoneNumber = txtPhone.Text.Trim();
             Email = txtEmail.Text.Trim();
 
-            CheckIn = Convert.ToDateTime(lblCheckInOut.Content);
+            CheckIn = Convert.ToDateTime(lblCheckInOut.Content).Date;
             CheckOutDate = CheckIn.Date;
 
-            CheckOut = Convert.ToDateTime(lblCheckOutOut.Content);
+            CheckOut = Convert.ToDateTime(lblCheckOutOut.Content).Date;
             CheckInDate = CheckOut.Date;
 
 
             //Add the reservation to the reservation list
-            Reservation newReservation = new Reservation(CheckInDate, CheckOutDate,
+            Reservation newReservation = new Reservation(CheckInDate.Date, CheckOutDate.Date,
                 FirstName, LastName, PhoneNumber, Email, lblRoomTypeOut.Content.ToString(), CurrentQuote.NoOfRoom,
                 lblTotalPriceOut.Content.ToString());
 
@@ -281,10 +281,19 @@ namespace Group03
             // try to export JSON data from roomList
             try
             {
+                //try to append the file
                 StreamWriter writer = new StreamWriter(strFilePath, false);
                 string jsonData = JsonConvert.SerializeObject(reservationlist);
+                
+
+                //create the data
                 writer.Write(jsonData);
+
+                //Close the writer
                 writer.Close();
+
+                reservationlist = JsonConvert.DeserializeObject<List<Reservation>>(jsonData);
+
             }
 
             // if an error occurs print out error message
@@ -301,7 +310,31 @@ namespace Group03
                 "Total cost: " + lblTotalPriceOut.Content);
         }
 
-        //reverse string method
+        private void LoadFromJson()
+        {
+            string strFilePath = @"..\..\Data\Reservations.json";
+
+            // read and try to import JSON data into roomList
+            try
+            {
+                //Read the file to the end from the starting position
+                StreamReader reader = new StreamReader(strFilePath);
+                string jsonData = reader.ReadToEnd();
+
+                //Close the reader
+                reader.Close();
+
+                reservationlist = JsonConvert.DeserializeObject<List<Reservation>>(jsonData);
+            }
+
+            // if an error occurs print out error message
+            catch (Exception ex)
+            {
+                MessageBox.Show("Import failed: " + ex.Message);
+            }
+        }
+
+            //reverse string method
         private static string ReverseString(string s)
         {
             char[] array = s.ToCharArray();
