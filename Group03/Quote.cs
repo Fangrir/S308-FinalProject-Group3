@@ -17,6 +17,7 @@ namespace Group03
         public string CheckOutDate { get; set; }
 
         public double TotalPrice { get; set; }
+        public int NoOfNight { get; set; }
 
         public Quote()
         {
@@ -25,15 +26,17 @@ namespace Group03
             CheckInDate = "";
             CheckOutDate = "";
             TotalPrice = 0;
+            NoOfNight = 0;
         }
 
-        public Quote(string room_type, int No_Of_Room, string checkin, string checkout, double totalprice)
+        public Quote(string room_type, int No_Of_Room, string checkin, string checkout, double totalprice, int noofnight)
         {
             RoomType = room_type;
             NoOfRoom = No_Of_Room;
             CheckInDate = checkin;
             CheckOutDate = checkout;
             TotalPrice = totalprice;
+            NoOfNight = noofnight;
         }
 
 

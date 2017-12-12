@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Group03"
         mc:Ignorable="d"
-        Title="Create New Reservation" Height="404.73" Width="617.644" ResizeMode="NoResize">
+        Title="Create New Reservation" Height="404.73" Width="617.644" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Background="#FFF9F3F3">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

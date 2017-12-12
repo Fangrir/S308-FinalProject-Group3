@@ -25,21 +25,6 @@ namespace Group03
         Quote CurrentQuote { get; set; }
 
         List<Reservation> reservationlist;
-        public New_Reservation_2()
-        {
-            InitializeComponent();
-
-            //Set all textbox to empty
-            txtFirstName.Text = "";
-            txtLastName.Text = "";
-            txtCardNo.Text = "";
-            txtCardType.Text = "";
-            txtPhone.Text = "";
-            txtEmail.Text = "";
-
-            //create reservation list
-            reservationlist = new List<Reservation>();
-        }
 
         public New_Reservation_2(Quote quote)
         {
@@ -59,7 +44,7 @@ namespace Group03
             //Show data from previous window
             lblNoOfRoomsOut.Content = CurrentQuote.NoOfRoom.ToString();
             lblRoomTypeOut.Content = CurrentQuote.RoomType.ToString();
-            lblCheckInOut.Content = CurrentQuote.CheckInDate.ToString(); ;
+            lblCheckInOut.Content = CurrentQuote.CheckInDate.ToString();
             lblCheckOutOut.Content = CurrentQuote.CheckOutDate.ToString();
             lblTotalPriceOut.Content = "$" + String.Format("{0:n}", CurrentQuote.TotalPrice.ToString());
 
@@ -110,7 +95,6 @@ namespace Group03
 
             //Validate card number
             long lngOut;
-            bool bolValid = false;
             int i;
             int intCheckDigit;
             int intCheckSum = 0;
@@ -121,43 +105,88 @@ namespace Group03
             //Parse Variable
             double dblNum;
 
-            //Validate if first name is empty or numbers, validation errors show a pop up message
+            // variables to check empty fields
+            bool bolEmpty = false; // boolean that is set to true whenever there is an unselected/empty field
+            string strEmpty = ""; // string used to add fields that will be displayed whenever they are empty
+
+            // check for empty fields
             if (txtFirstName.Text.Trim() == "")
             {
-                MessageBox.Show("Please provide customer first name");
-                return;
-            }
-            if (double.TryParse(txtFirstName.Text.Trim(), out dblNum))
-            {
-                MessageBox.Show("Please provide your first name without containing numbers");
-                return;
+                bolEmpty = true;
+                strEmpty = "first name";
             }
 
-            //Validate if last name is empty or numbers, validation errors show a pop up message
             if (txtLastName.Text.Trim() == "")
             {
-                MessageBox.Show("Please provide customer last name");
-                return;
+                if (bolEmpty == true)
+                    strEmpty = strEmpty + ", last name";
+
+                else
+                {
+                    bolEmpty = true;
+                    strEmpty = "last name";
+                }
             }
-            if (double.TryParse(txtLastName.Text.Trim(), out dblNum))
+
+            if (txtCardNo.Text.Trim() == "")
             {
-                MessageBox.Show("Please provide customer last name without containing numbers");
+                if (bolEmpty == true)
+                    strEmpty = strEmpty + ", credit card no";
+
+                else
+                {
+                    bolEmpty = true;
+                    strEmpty = "credit card no";
+                }
+            }
+
+            if (txtPhone.Text.Trim() == "")
+            {
+                if (bolEmpty == true)
+                    strEmpty = strEmpty + ", phone no";
+
+                else
+                {
+                    bolEmpty = true;
+                    strEmpty = strEmpty + "phone no";
+                }
+            }
+
+            // if bolEmpty is true, display message showing all empty fields that needs to be sorted out
+            if (bolEmpty == true)
+            {
+                MessageBox.Show("The field(s) " + strEmpty + " cannot be empty.");
                 return;
             }
 
-            //validate if card number is empty
+            //Check whether first name contains numbers, show error if true
+            if (double.TryParse(txtFirstName.Text.Trim(), out dblNum))
+            {
+                MessageBox.Show("First name cannot contain numbers.");
+                return;
+            }
+
+            //Check whether last name contains numbers, show error if true
+            if (double.TryParse(txtLastName.Text.Trim(), out dblNum))
+            {
+                MessageBox.Show("Last name cannot contain numbers.");
+                return;
+            }
+
+            //Check that credit card only contains numbers
             if (!Int64.TryParse(strCardNum, out lngOut))
             {
-                MessageBox.Show("Credit card numbers contain only numbers.");
+                MessageBox.Show("Credit card can only contain numeric values.");
                 return;
             }
 
             //Validate the card number length
             if (strCardNum.Length != 13 && strCardNum.Length != 15 && strCardNum.Length != 16)
             {
-                MessageBox.Show("Credit card numbers must contain 13, 15, or 16 digits.");
+                MessageBox.Show("Credit card numbers must be either 13, 15, or 16 digits.");
                 return;
             }
+
             //Validate the card number
             strCardNum = ReverseString(strCardNum);
 
@@ -178,43 +207,34 @@ namespace Group03
                 intCheckSum += intCheckDigit;
             }
 
-            if (intCheckSum % 10 == 0)
+            // show error if the checksum is not valid
+            if (intCheckSum % 10 != 0)
             {
-                bolValid = true;
-            }
-
-            //if the credit card not valid
-            if (!bolValid)
-            {
-                MessageBox.Show("Card is not valid");
+                MessageBox.Show("Credit card number is not valid.");
                 return;
             }
 
-            //Validate if phone number is empty, not numbers. Validation errors show a pop up message
-            if (txtPhone.Text.Trim() == "")
+            // validate that phone number only contain numbers
+            if (!Int64.TryParse(txtPhone.Text, out lngOut))
             {
-                MessageBox.Show("Please provide a phone number");
-                return;
-            }
-
-            if (!double.TryParse(txtPhone.Text, out dblNum))
-            {
-                MessageBox.Show("Please provide a phone number with numbers only");
+                MessageBox.Show("Phone number can only contain numeric values.");
                 return;
             }
 
             if (txtPhone.Text.Trim().Length != 10)
             {
-                MessageBox.Show("Please provide a phone number that contains 10 digit number");
+                MessageBox.Show("Phone number must be 10 digits.");
                 return;
             }
 
-            //validate if an optional email conatains @, validation errors show a pop up message
-
-            if (!txtEmail.Text.Trim().Contains("@") && txtEmail.Text != "")
+            // if email is not empty, validate it
+            if (txtEmail.Text.Trim() != "")
             {
-                MessageBox.Show("Please provide an email address that contains @");
-                return;
+                if (IsValidEmail(txtEmail.Text.Trim()) == false)
+                {
+                    MessageBox.Show("Email must be in valid format.");
+                    return;
+                }
             }
 
             //Store the inputed value
@@ -242,7 +262,7 @@ namespace Group03
             SaveToJson();
 
             //Return to main Menu
-            MainWindow mw = new MainWindow();
+            New_Reservation mw = new New_Reservation();
             mw.Show();
             this.Close();
         }
@@ -270,11 +290,15 @@ namespace Group03
             // if an error occurs print out error message
             catch (Exception ex)
             {
-                MessageBox.Show("Export failed: " + ex.Message);
+                MessageBox.Show("Reservation failed to save: " + ex.Message);
             }
 
-            // notify user that the export is completed and show filepath of new file
-            MessageBox.Show("Export successful." + Environment.NewLine + "File Created: " + strFilePath);
+            // notify that reservation has been created and print out info
+            MessageBox.Show("Reservation created!" + Environment.NewLine +
+                "Room type: " + lblRoomTypeOut.Content + Environment.NewLine +
+                "Check-in date: " + lblCheckOutOut.Content + Environment.NewLine +
+                "Number of nights: " + CurrentQuote.NoOfNight + Environment.NewLine +
+                "Total cost: " + lblTotalPriceOut.Content);
         }
 
         //reverse string method
@@ -285,6 +309,21 @@ namespace Group03
             return new string(array);
         }
 
+        // function to check whether an email is valid or not
+        bool IsValidEmail(string email)
+        {
+            // try to create a MailAddress instance using user input
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
 
+            // if an error occurs, return false (email is invalid)
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
