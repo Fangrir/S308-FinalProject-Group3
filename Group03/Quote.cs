@@ -12,9 +12,9 @@ namespace Group03
 
         public int NoOfRoom { get; set; }
 
-        public string CheckInDate { get; set; }
+        public DateTime CheckInDate { get; set; }
 
-        public string CheckOutDate { get; set; }
+        public DateTime CheckOutDate { get; set; }
 
         public double TotalPrice { get; set; }
         public int NoOfNight { get; set; }
@@ -23,18 +23,18 @@ namespace Group03
         {
             RoomType = "";
             NoOfRoom = 0;
-            CheckInDate = "";
-            CheckOutDate = "";
+            CheckInDate = default(DateTime);
+            CheckOutDate = default(DateTime);
             TotalPrice = 0;
             NoOfNight = 0;
         }
 
-        public Quote(string room_type, int No_Of_Room, string checkin, string checkout, double totalprice, int noofnight)
+        public Quote(string room_type, int No_Of_Room, DateTime checkin, DateTime checkout, double totalprice, int noofnight)
         {
             RoomType = room_type;
             NoOfRoom = No_Of_Room;
-            CheckInDate = checkin;
-            CheckOutDate = checkout;
+            CheckInDate = checkin.Date;
+            CheckOutDate = checkout.Date;
             TotalPrice = totalprice;
             NoOfNight = noofnight;
         }

@@ -128,11 +128,15 @@ namespace Group03
             // read and try to import JSON data into roomList
             try
             {
+                //Read the file to the end from the starting position
                 StreamReader reader = new StreamReader(strFilePath);
                 string jsonData = reader.ReadToEnd();
+
+                //Close the reader
                 reader.Close();
 
                 reservationList = JsonConvert.DeserializeObject<List<Reservation>>(jsonData);
+
 
                 dtgReservation.ItemsSource = reservationList;
             }

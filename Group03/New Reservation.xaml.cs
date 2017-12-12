@@ -52,7 +52,7 @@ namespace Group03
         //When the users select a checkout date
         private void dtpCheckOut_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dtpCheckOut.SelectedDate < dtpCheckIn.SelectedDate || dtpCheckOut.SelectedDate < DateTime.Today)
+            if (dtpCheckOut.SelectedDate <= dtpCheckIn.SelectedDate || dtpCheckOut.SelectedDate < DateTime.Today)
             {
                 MessageBox.Show("Please input a valid check out date.");
                 dtpCheckOut.SelectedDate = null;
@@ -156,7 +156,7 @@ namespace Group03
             
             //Insert data to the constructor
              MyQuote = new Quote(cbxRoomType.Text, Convert.ToInt32(txtNoOfRooms.Text.Trim()), 
-                dtpCheckIn.SelectedDate.ToString(), dtpCheckOut.SelectedDate.ToString(),
+                dtpCheckIn.SelectedDate.Value.Date, dtpCheckOut.SelectedDate.Value.Date,
                 ((NoOfNights * RatePerNight * NoOfRooms) + ((NoOfNights * RatePerNight * NoOfRooms) * 0.07) + (10 * NoOfNights)), NoOfNights);
 
             //Calculate quote variables and output them
