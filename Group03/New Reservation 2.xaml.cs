@@ -57,7 +57,7 @@ namespace Group03
             string strCardNum = txtCardNo.Text.Trim().Replace(" ", "");
             string strCardType;
 
-            //Look up the card type value
+            // Look up the card type value
             if (strCardNum.StartsWith("34") || strCardNum.StartsWith("37"))
             {
                 strCardType = "AMEX";
