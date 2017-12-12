@@ -302,7 +302,7 @@ namespace Group03
             // notify that reservation has been created and print out info
             MessageBox.Show("Reservation created!" + Environment.NewLine +
                 "Room type: " + lblRoomTypeOut.Content + Environment.NewLine +
-                "Check-in date: " + lblCheckOutOut.Content + Environment.NewLine +
+                "Check-in date: " + lblCheckInOut.Content + Environment.NewLine +
                 "Number of nights: " + CurrentQuote.NoOfNight + Environment.NewLine +
                 "Total cost: " + lblTotalPriceOut.Content);
         }

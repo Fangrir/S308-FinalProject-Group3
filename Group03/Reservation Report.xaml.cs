@@ -117,6 +117,8 @@ namespace Group03
             // if everything else fails
             else
             {
+                LoadFromJson();
+                dtgReservation.Items.Refresh();
                 MessageBox.Show("Criteria must include atleast a date range or a last name.");
                 return;
             }
