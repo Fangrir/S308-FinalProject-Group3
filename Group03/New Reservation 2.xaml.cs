@@ -24,7 +24,7 @@ namespace Group03
         //Property
         Quote CurrentQuote { get; set; }
 
-        List<Reservation> reservationlist;
+        Reservation newReservation = new Reservation();
 
         public New_Reservation_2(Quote quote)
         {
@@ -47,9 +47,6 @@ namespace Group03
             lblCheckInOut.Content = CurrentQuote.CheckInDate.ToString("MM/dd/yyyy");
             lblCheckOutOut.Content = CurrentQuote.CheckOutDate.ToString("MM/dd/yyyy");
             lblTotalPriceOut.Content = "$" + String.Format("{0:n}", CurrentQuote.TotalPrice.ToString());
-
-            //create reservation list
-            reservationlist = new List<Reservation>();
         }
         private void CardNumber_TextChange(object sender, TextChangedEventArgs e)
         {
@@ -245,23 +242,21 @@ namespace Group03
             Email = txtEmail.Text.Trim();
 
             CheckIn = Convert.ToDateTime(lblCheckInOut.Content).Date;
-            CheckOutDate = CheckIn.Date;
+            CheckInDate = CheckIn.Date;
 
             CheckOut = Convert.ToDateTime(lblCheckOutOut.Content).Date;
-            CheckInDate = CheckOut.Date;
+            CheckOutDate = CheckOut.Date;
 
 
             //Add the reservation to the reservation list
-            Reservation newReservation = new Reservation(CheckInDate.Date, CheckOutDate.Date,
+            newReservation = new Reservation(CheckInDate.Date, CheckOutDate.Date,
                 FirstName, LastName, PhoneNumber, Email, lblRoomTypeOut.Content.ToString(), CurrentQuote.NoOfRoom,
                 lblTotalPriceOut.Content.ToString());
-
-            reservationlist.Add(newReservation);
 
             //Save to json file
             SaveToJson();
 
-            //Return to main Menu
+            //Return to new reservation 1
             New_Reservation mw = new New_Reservation();
             mw.Show();
             this.Close();
@@ -278,22 +273,24 @@ namespace Group03
         {
             string strFilePath = @"..\..\Data\Reservations.json";
 
-            // try to export JSON data from roomList
+            // try to export JSON data from newReservation
             try
             {
-                //try to append the file
-                StreamWriter writer = new StreamWriter(strFilePath, false);
-                string jsonData = JsonConvert.SerializeObject(reservationlist);
-                
+                // read all text from existing JSON data
+                var jsonData = System.IO.File.ReadAllText(strFilePath);
 
-                //create the data
-                writer.Write(jsonData);
+                // deserialize all read objects from the JSON into a list
+                var reservationList = JsonConvert.DeserializeObject<List<Reservation>>(jsonData)
+                        ?? new List<Reservation>();
 
-                //Close the writer
-                writer.Close();
+                // append the new reservation data into the list
+                reservationList.Add(newReservation);
 
-                reservationlist = JsonConvert.DeserializeObject<List<Reservation>>(jsonData);
+                // serialize list back into json format
+                jsonData = JsonConvert.SerializeObject(reservationList);
 
+                // write all data into the existing json file
+                System.IO.File.WriteAllText(strFilePath, jsonData);
             }
 
             // if an error occurs print out error message
@@ -310,31 +307,7 @@ namespace Group03
                 "Total cost: " + lblTotalPriceOut.Content);
         }
 
-        private void LoadFromJson()
-        {
-            string strFilePath = @"..\..\Data\Reservations.json";
-
-            // read and try to import JSON data into roomList
-            try
-            {
-                //Read the file to the end from the starting position
-                StreamReader reader = new StreamReader(strFilePath);
-                string jsonData = reader.ReadToEnd();
-
-                //Close the reader
-                reader.Close();
-
-                reservationlist = JsonConvert.DeserializeObject<List<Reservation>>(jsonData);
-            }
-
-            // if an error occurs print out error message
-            catch (Exception ex)
-            {
-                MessageBox.Show("Import failed: " + ex.Message);
-            }
-        }
-
-            //reverse string method
+        //reverse string method
         private static string ReverseString(string s)
         {
             char[] array = s.ToCharArray();

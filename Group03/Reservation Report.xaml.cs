@@ -51,23 +51,29 @@ namespace Group03
             //Remove the item source first
             dtgReservation.ItemsSource = "";
 
-            //if the date range is not available but the lastname input is not blank
-            if(txtLastName.Text.Trim() == "" && dtpStartDate.SelectedDate.Value != null && dtpEndDate.SelectedDate.Value != null)
+            //if none of the input is blank
+            if (dtpStartDate.SelectedDate.ToString() != "" && dtpEndDate.SelectedDate.ToString() != "" && txtLastName.Text != "")
             {
                 dtCheckinDate = dtpStartDate.SelectedDate.Value.Date;
                 dtCheckOutDate = dtpEndDate.SelectedDate.Value.Date;
 
                 var ReservationSearch = reservationList.Where(r =>
                 r.CheckinDate >= dtCheckinDate &&
-                r.CheckoutDate <= dtCheckOutDate);
+                r.CheckoutDate <= dtCheckOutDate &&
+                r.LastName.StartsWith(strLastName));
 
-                foreach (Reservation r in ReservationSearch)    
+                foreach (Reservation r in ReservationSearch)
                 {
                     dtgReservation.ItemsSource = ReservationSearch.ToList();
                 }
+
+                if (ReservationSearch.ToString() == "")
+                {
+                    MessageBox.Show("No record found. Pleaase check your input");
+                }
             }
 
-            //if the lastname text is blank
+            // if no date range but last name provided
             else if(dtpStartDate.SelectedDate.ToString() == "" && dtpEndDate.SelectedDate.ToString() == ""
                 && txtLastName.Text.Trim() != "")
             {
@@ -84,32 +90,36 @@ namespace Group03
                 }
             }
 
-            //if none of the input is blank
-            else if(dtpStartDate.SelectedDate.ToString() != "" && dtpEndDate.SelectedDate.ToString() != "" && txtLastName.Text != "")
+            // if no last name but date range provided
+            else if (txtLastName.Text.Trim() == "" && dtpStartDate.SelectedDate.ToString() != "" && dtpEndDate.SelectedDate.ToString() != "")
             {
                 dtCheckinDate = dtpStartDate.SelectedDate.Value.Date;
                 dtCheckOutDate = dtpEndDate.SelectedDate.Value.Date;
 
                 var ReservationSearch = reservationList.Where(r =>
                 r.CheckinDate >= dtCheckinDate &&
-                r.CheckoutDate <= dtCheckOutDate &&
-                r.LastName.StartsWith(strLastName));
+                r.CheckoutDate <= dtCheckOutDate);
 
                 foreach (Reservation r in ReservationSearch)
                 {
                     dtgReservation.ItemsSource = ReservationSearch.ToList();
                 }
-
-                if( ReservationSearch.ToString() == "")
-                {
-                    MessageBox.Show("No record found. Pleaase check your input");
-                }
             }
+
+            // if everything is blank
+            else if (txtLastName.Text.Trim() == "" && dtpStartDate.SelectedDate.ToString() == "" && dtpEndDate.SelectedDate.ToString() == "")
+            {
+                LoadFromJson();
+                dtgReservation.Items.Refresh();
+                MessageBox.Show("No criterias were entered.");
+            }
+
+            // if everything else fails
             else
             {
-                MessageBox.Show("Please check your input again");
+                MessageBox.Show("Criteria must include atleast a date range or a last name.");
+                return;
             }
-
         }
 
         //When the main menu button is clicked
